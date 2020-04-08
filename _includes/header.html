@@ -1,0 +1,47 @@
+<header class="main-header content-wrapper">
+
+  <input type="checkbox" id="menu-checkbox" />
+
+  <nav class="center-wrapper nav-main">
+
+    <a class="blog-logo" href="{{ site.baseurl }}/">{{ site.title }}</a>
+
+    <!--{% for my_page in site.pages %}
+	
+		
+	{% if my_page.active == "develop" %}
+	-->
+	<div class="site-category" >
+		<ul class="cat1" >
+			<li><a href="/">DEVELOP</a>
+				<ul>
+				<div class="opacity">
+					<li><a href="/Projects">Projects</a></li>
+					<li><a href="/Diary">Diary</a></li>
+				</div>
+				</ul>
+			</li>
+		</ui>
+	</div>
+	<a href="/about">ABOUT</a>
+		<!--
+          <li><a class="category-link {% if page.url == my_page.url %} active {% endif %}"
+          href="{{ site.baseurl }}{{ my_page.url }}">{{ my_page.title }}</a></li>
+		 -->
+	<!--	{% endif %}
+	{% if my_page.active and my_page.active != "develop" %}
+	-->
+	
+	
+	
+	<!--
+	<a href="{{ my_page.url | prepend: site.baseurl }}">{{ my_page.title }}</a>
+		{% endif %}
+    {% endfor %}
+	-->
+    <!--<a href="{{ "/feed.xml" | prepend: site.baseurl }}">RSS</a>
+	-->
+    <label for="menu-checkbox" class="toggle-button" data-open="☰" data-close="☰" onclick></label>
+  </nav>
+
+</header>
