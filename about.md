@@ -1,5 +1,5 @@
 ---
-bg: "owl.jpg"
+bg: "tags.jpg"
 layout: default
 title: "About"
 crawlertitle: "Why and how this blog was created"
