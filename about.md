@@ -1,6 +1,6 @@
 ---
 bg: "owl.jpg"
-layout: page
+layout: default
 title: "About"
 crawlertitle: "Why and how this blog was created"
 permalink: /about/
