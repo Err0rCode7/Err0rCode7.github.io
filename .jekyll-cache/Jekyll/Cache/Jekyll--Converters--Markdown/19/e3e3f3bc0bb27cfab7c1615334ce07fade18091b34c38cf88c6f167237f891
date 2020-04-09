@@ -1,0 +1,33 @@
+I"g<h1 id="introduction-about-this-blog">Introduction about this blog</h1>
+<hr />
+
+<ul>
+  <li>
+    <h2 id="err0rcode7">Err0rCode7</h2>
+    <p>충북대학교 컴퓨터공학과에 4학년으로 재학중인 전승원입니다.<br />
+IoT, 인공지능, SW 개발에 관심을 갖고 꾸준히 노력해 나가는 개발자 중 한명입니다.<br />
+선두적이고 대다수의 사람들이 사용하는 SW를 이끄는 것을 꿈꾸는 초보 개발자입니다.<br /><br />
+[<img src="/assets/images/insta.png" alt="insta" width="20" />]<a href="https://www.instagram.com/_swerror/">_swerror</a></p>
+  </li>
+</ul>
+
+<p><img width="20" src="/assets/images/github.png" alt="github" />
+<a href="https://github.com/Err0rCode7">Err0rCode7</a></p>
+
+<ul>
+  <li>
+    <h2 id="why-do-i-blog">Why do i blog?</h2>
+    <ul>
+      <li>
+        <h5 id="기록-보관-">기록 보관 <br /></h5>
+        <p>깃허브를 통하여 나의 프로젝트들을 정리하고 설계, 개발 과정에서의 고찰, 나의 성장 등을 담아 보관하기 위함입니다.<br /></p>
+      </li>
+      <li>
+        <h5 id="정보-공유-">정보 공유 <br /></h5>
+        <p>같은 고민을 하고 있는 학생, 개발자분들과 나의 경험을 토대로 정보를 공유하여 도움을 주고 그들의 피드백을 통하여 도움을 받기 위함입니다.</p>
+      </li>
+    </ul>
+  </li>
+</ul>
+
+:ET

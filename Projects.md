@@ -8,7 +8,7 @@ crawlertitle: "Projects from Err0rCode7"
 summary: "Projects"
 active: Projects
 ---
-{% for post in site.posts limit: 5 %}
+{% for post in site.posts %}
   {% if post.category == "Project" %}
   <article class="index-page">
     <h2><a href="{{ post.url | relative_url }}">{{ post.title }}</a></h2>
