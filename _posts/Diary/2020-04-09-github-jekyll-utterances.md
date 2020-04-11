@@ -18,10 +18,9 @@ author: Err0rCode7
 어떤 순서로 얘기를 진행할지 목차를 알려드리겠습니다.<br>
 
 1. 필요한 기본 설치
-2. jekyll 적용
+2. jekyll 테마 적용
 3. jekyll은 어떤식으로 동작하는가 ?
-4. jekyll 블로그 뜯어보기
-5. 댓글 기능 추가하기, utterances
+4. 댓글 기능 추가하기, utterances
 
 위과 같은 진행해보도록 하겠습니다~ 그러면 시작하죠!<br>
 
@@ -63,7 +62,7 @@ gem install jekyll bundler
 
 이렇게 github repo와 jekyll, bundler, jekyll 테마를 준비해주시면 됩니다.
 
-#### 2. jekyll 적용
+#### 2. jekyll 테마 적용
 
 이제 jekyll 테마를 적용해봅시다.
 
@@ -105,3 +104,73 @@ git push
 ```
 
 이제 계정네임.github.io 사이트에 접속하셔서 테마가 적용이 된걸 확인하실 수 있습니다.
+
+### 3. jekyll은 어떤식으로 동작하는가 ?
+
+이제 "jekyll 어떤식으로 동작하는가 ?" 에 대해서 다뤄보겠습니다.
+
+#### 3.1 index.html
+
+자신의 블로그 링크에 들어가보면 메인 페이지를 볼 수 있습니다.<br>
+이 메인페이지가 보여지는 파일이 바로 index.html 입니다.
+
+index.html에 있는 객체와 내용으로 메인 페이지가 나오게 됩니다.
+이 내용은 바로 뒤에 내용에서 같이 이해해보도록 합시다.
+
+#### 3.2 _posts
+
+![_post](https://user-images.githubusercontent.com/48249549/79038446-465e5980-7c14-11ea-8dec-a440d46e0223.png)
+
+본인의 github.io repository를 보면 위에 사진처럼 _posts 폴더를 확인해 볼 수 있습니다.
+
+jekyll은 이 폴더에 yyyy-mm-dd-title.md 형식으로 마크다운을 입력하면 자동적으로 게시가되는 방식입니다. 즉, 이 폴더에서 마크다운을 작성하거나 삭제함으로써 게시글을 올리거나 내릴 수 있습니다.<br>
+
+그렇다면 이 마크다운 파일은 어떤식으로 작성해야 되는걸까요 ? 마크다운 파일 내부를 살펴보도록 하죠
+
+![one of posts](https://user-images.githubusercontent.com/48249549/79038630-c2a56c80-7c15-11ea-8b3d-d1e72ae92365.png)
+
+예시 마크다운 파일을 가져와봤습니다.<br>
+
+마크다운에 상단에 보면 테두리로 여러 객체가 묶여있는 것을 볼 수 있습니다.<br>
+이 객체들이 html파일( 테마 )에 적용되어 게시글을 표현한다고 보시면 됩니다. <br> 
+
+bg는 배경사진, layout은 말 그대로 마크다운 파일이 어떤 레이아웃으로 포스팅이 될지 정해주는 것입니다.<br> 
+
+html 형태의 layout이 있고 틀안에 마크다운에 적은 게시글 내용이 쏘옥 들어간다고 보시면 됩니다. <br>
+( 실제로 post.html에 `content` 객체에 들어갑니다. )
+
+layout 파일들은 _layouts 폴더 안에 html로 있으며 이것을 수정하여 자신의 블로그 테마를 수정하거나 여러가지 페이지로 꾸밀 수 있습니다.<br>
+( 블로그를 꾸밀 때 본인 테마의 layout 구조가 어떻게 되어 있는지 알고 있어야합니다. html이 어떤식으로 계층화 되어있는지 살펴보는 것을 추천드립니다. )<br>
+
+title부터 date 까지는 게시글에 대한 내용들 입니다.<br>
+
+categories는 블로그 게시자가 항목 별로 나누어서 post를 관리하거나 게시할 수 있는 용도로 사용됩니다.<br>
+예를 들어 저의 블로그에서 Project와 Diary를 나눈 것 처럼 이용할 수 있습니다. <br>
+
+tag는 말 그대로 블로그 태그처럼 사용할 수 있는 객체입니다.
+author는 게시글의 저자를 나타내주는 객체입니다.
+
+#### 3.2 _config.yml
+
+jekyll은 블로그의 제목과 자신의 개인 정보를 설정하거나 테마에 대해서 설정할 수 있는 파일이 있습니다.
+
+![config file](https://user-images.githubusercontent.com/48249549/79039136-23cf3f00-7c1a-11ea-9aad-6863839a39c3.png)
+![config.yml](https://user-images.githubusercontent.com/48249549/79039198-9c360000-7c1a-11ea-9508-af02a23c5092.png)
+
+바로 위에 사진파일입니다. title, email, url 등을 수정하여 다운받은 테마를 본인의 내용으로 꾸밀 수 있습니다.
+
+#### 3.3 active
+
+active 객체는 메뉴바를 관리하는 객체입니다.<br>
+제 블로그를 예시로 어떻게 사용했는지 보여드리겠습니다.<br>
+
+![menu ba](https://user-images.githubusercontent.com/48249549/79039280-2a11eb00-7c1b-11ea-8a9b-1a58c1b65641.png)
+![active](https://user-images.githubusercontent.com/48249549/79039678-e53b8380-7c1d-11ea-870f-b7658cb6859d.png)
+
+블로그 repository 안에 `Diary.md` `Projects.md` `about.md`을 각각 작성하고 이 파일들에 `active` 를 정의하여 메뉴바를 생성하였습니다.<br>
+위에 사진처럼 저의 블로그는 index.html, 위에 마크다운 파일들을 포함하여 총 4개의 메뉴바를 생성한 모습을 보실수 있습니다.<br>
+
+<br>
+**위에 내용들을 종합하여 자신만의 레이아웃을 적용하여 블로그를 꾸밀 수 있고 active을 이용하여 메뉴바 생성하거나, 카테고리 객체를 이용하여 자신이 원하는 메뉴를 설정하여 _posts에 마크다운 형태로 글을 작성할 수 있습니다.**
+
+### 4. 댓글 기능 추가하기, utterances
