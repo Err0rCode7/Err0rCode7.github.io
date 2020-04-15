@@ -23,9 +23,12 @@ author: Err0rCode7
 4. 댓글 기능 추가하기, utterances
 
 위과 같은 진행해보도록 하겠습니다~ 그러면 시작하죠!<br>
+<br>
+<br>
 
+---
 #### 1. 필요한 기본 설치
-
+---
 간략하게 어떤 것들이 필요하고 준비해야 하는지에 대해서만 다루도록 하겠습니다.
 
 저희는 Github를 이용하여 블로그를 만들어야하기 때문에 반드시! git이 설치되어 있어야 하고 github에 가입이 되어있어야 합니다.<br><br>
@@ -61,9 +64,12 @@ gem install jekyll bundler
 ( 테마에 따라 설정방법이 다를 수 있습니다. )
 
 이렇게 github repo와 jekyll, bundler, jekyll 테마를 준비해주시면 됩니다.
+<br>
+<br>
 
+---
 #### 2. jekyll 테마 적용
-
+---
 이제 jekyll 테마를 적용해봅시다.
 
 
@@ -104,9 +110,12 @@ git push
 ```
 
 이제 계정네임.github.io 사이트에 접속하셔서 테마가 적용이 된걸 확인하실 수 있습니다.
+<br>
+<br>
 
+---
 ### 3. jekyll은 어떤식으로 동작하는가 ?
-
+---
 이제 "jekyll 어떤식으로 동작하는가 ?" 에 대해서 다뤄보겠습니다.
 
 #### 3.1 index.html
@@ -173,4 +182,67 @@ active 객체는 메뉴바를 관리하는 객체입니다.<br>
 <br>
 **위에 내용들을 종합하여 자신만의 레이아웃을 적용하여 블로그를 꾸밀 수 있고 active을 이용하여 메뉴바 생성하거나, 카테고리 객체를 이용하여 자신이 원하는 메뉴를 설정하여 _posts에 마크다운 형태로 글을 작성할 수 있습니다.**
 
+추가로 메뉴를 카테고리 블록으로 구성할 때 참고했던 블로그 링크 남깁니다.
+[카테고리 블록](https://devyurim.github.io/development%20environment/github%20blog/2018/08/12/blog-8.html)
+<br>
+<br>
+
+---
 ### 4. 댓글 기능 추가하기, utterances
+---
+이렇게 블로그를 만들면 사람들과 소통을 할 수 있는 공간이 필요하겠죠. <br>
+Github issue 기반을 이용해서 댓글을 작성할 수 있는 오픈소스 utterances를 사용해봅시다. <br>
+
+[utterances](https://utteranc.es/) <br>
+
+우선 위에 링크에 접속해봅시다.
+
+![repo_utterances](https://user-images.githubusercontent.com/48249549/79304006-479cc880-7f2b-11ea-89c3-93e636ef6bda.png)
+
+접속을 하면 위에 사진처럼 나옵니다. 내용을 따라서 진행해보도록 합시다. <br>
+
+우선 issue를 사용할 public repository가 필요합니다. <br>
+하나 만들어 주시거나 Github.io repo를 그대로 사용하셔도 됩니다. <br>
+( 저는 따로 blog-comment라는 repository를 만들어서 관리를 하고있습니다. )<br>
+
+그 다음으로 해당 repository에 utterances 깃허브 앱을 설치해줘야 합니다. <br>
+[utterances app](https://github.com/apps/utterances) 
+링크에 들어가서 빠르게 진행해주시면 됩니다.
+
+이제 `repo:` 에 앱을 설치한 repository를 입력해주시면 됩니다.<br>
+
+![utterance2](https://user-images.githubusercontent.com/48249549/79304396-356f5a00-7f2c-11ea-8bea-a3b127508b35.png)
+![utterance3](https://user-images.githubusercontent.com/48249549/79304454-5932a000-7f2c-11ea-9f33-96163317e611.png)
+
+이제 issue가 어떤 방식으로 맵핑 되는 지와 라벨, 테마를 정해봅시다.
+
+위에 사진처럼 issue에 맵핑하는 방법은 여러가지 옵션이 있습니다.
+
+- pathname
+    - 포스트의 pathname 으로 이슈를 생성한다.
+- page URL
+    - 게시글의 URL 전체로 이슈를 매핑한다.
+- page title
+    - 게시글의 제목으로 이슈를 매핑한다.
+- issue number
+    - 이슈 번호를 가지고 매핑한다.
+- issue title contains specific term
+    - 게시글 제목에 특정 단어가 들어가 있는지 체크하여 매핑한다.
+
+본인이 issue를 어떤식으로 관리할지 생각하여 선택해주시면 됩니다. <br>
+
+라벨은 본인의 이슈 뒤에 스티커(?)같은 것을 표시해주는 것입니다. <br> 
+원하는 단어를 넣어서 구분이 가능하게 사용할 수 있습니다.<br>
+
+이제 적용을 해봅시다.
+
+![utter 사진](https://user-images.githubusercontent.com/48249549/79305984-4f5e6c00-7f2f-11ea-9ffb-a478a37482e7.png)
+
+위에 사진에 있는 부분에 있는 코드를 _layouts/post.html 맨 아랫부분에 적용하시면 바로 댓글처럼 사용하실 수 있습니다.
+<br>
+<br>
+이렇게 Github.io 블로그와 jekyll 그리고 utterances에 대해서 제가 했던 것을 리뷰하면서 정리해봤습니다.<br>
+저와 같이 블로그를 시작하는 분들에게 도움이 되었으면 좋겠습니다.
+<br>
+
+이상으로 첫 포스팅은 여기에서 마치겠습니다.
