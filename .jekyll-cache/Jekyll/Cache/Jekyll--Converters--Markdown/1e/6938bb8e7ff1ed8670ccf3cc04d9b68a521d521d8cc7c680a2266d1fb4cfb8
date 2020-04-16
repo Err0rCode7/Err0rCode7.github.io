@@ -1,0 +1,343 @@
+I"��<p>이번 포스팅은 작년 MicroProcessor 수업에서 Atmega128을 사용하여 만들었던 미니 게임에 대해서 리뷰해보겠습니다.<br /></p>
+
+<p>우선 Atmega128은 ATMEL사가 개발한 8비트 AVR마이크로 컨트롤러의 megaAVR 패밀리 계열중 하나의 프로세서입니다. 이 프로세서는 64핀으로 구성되었으며, TQFP형 패키지의 저 전력 8비트 CMOS 마이크로 컨트롤러입니다. C언어와 라이브러리를 이용해서 명령어를 쉽게 이용할 수 있으며 원하는 포트의 핀에 LCD, 스위치, 7-segments, MOTOR 그리고 LED를 연결하고 코드상의 레지스터를 이용하여 사용할 수 있습니다. <br /></p>
+
+<p>이러한 Atmega128을 이용해서 미니 게임을 만들어 봤었습니다. RISC 구조로 명령어도 간단하고 사용하는데 많은 어려움이 없었던 것으로 기억이 납니다. <br /></p>
+
+<p>전원을 Atmega128와 연결하고 Atmega128과 컴퓨터의 포트를 연결해서 컴퓨터에서 작성한 C언어를 이용하여 원하는 명령어를 사용하여 실습과 프로젝트를 진행했었습니다.<br /></p>
+
+<p>수업 실습시간을 이용해서 Atmega128 키트에 있던 모든 기능들을 다 사용해보았었습니다.<br /></p>
+
+<p>그리고 마지막 term project로 각 조마다 아이디어 구상하여 창의적인 아이템을 만들어보는 프로젝트 기회를 가졌었습니다. <br /></p>
+
+<p>이 프로젝트에서 저희 조는 미니게임을 만들었었는데요, LCD 화면에 캐릭터와 장애물을 표현하고 계속해서 우측에서 좌측으로 장애물이 움직이면서 스위치를 이용하여 캐릭터를 점프시켜 장애물을 피하는 게임이었습니다.</p>
+
+<p><img src="https://user-images.githubusercontent.com/48249549/79439126-6b393f00-800f-11ea-8389-66fb91c23dcd.png" alt="atmega128-1" /></p>
+
+<p><img src="https://user-images.githubusercontent.com/48249549/79439197-7ab88800-800f-11ea-9ed5-750404534a9f.png" alt="atmega128-2" /></p>
+
+<p>위에 사진은 실제 프로젝트를 진행하고 찍은 사진입니다. 포트를 많이 사용하는 것에 추가 점수가 있어서 최대한 많은 포트를 사용하다보니
+굉장히 지저분 했었네요.. <br /></p>
+
+<p>두번째 사진은 실제 미니게임 프로젝트가 어떤식으로 표현됐었는지 보이네요.</p>
+
+<p>전체적인 게임의 시스템을 설명해드리면, 캐릭터와 장애물이 LCD에 표시가 되고 스위치를 이용하여 캐릭터는 점프를 할 수 있고 장애물을 피할 수 있습니다. 7-segments를 이용하여 사용자는 자신이 얻은 점수를 볼 수 있습니다. 장애물을 피하면 7-segments에 +점수가, 못피하면 -점수가 덧셈이 됩니다. 그리고 Motor와 led를 이용하여 장애물을 피할때와 못피할때에 이펙트를 주었습니다.</p>
+
+<p><a href="https://github.com/Err0rCode7/Mircoprocessor/blob/master/Project.c">My Atmega128 Project Code</a>
+<br /></p>
+
+<p>위에 저의 깃허브 링크인 이 링크에 들어가시면 당시에 실행했었던 코드를 자세히 확인 하실 수 있습니다.<br />
+<br /></p>
+
+<hr />
+<h3 id="project-code-review">Project Code Review</h3>
+<hr />
+
+<div class="language-c highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="cp">#include &lt;mega128.h&gt;
+#include &lt;delay.h&gt;
+#include &lt;stdio.h&gt;
+#include &lt;stdlib.h&gt;
+#include &lt;lcd.h&gt;
+</span>
+<span class="cp">#define mapsize 16
+#define Q0 PORTC.4
+#define Q1 PORTC.5
+#define Q2 PORTC.6
+#define Q3 PORTC.7
+#define FND PORTF
+#define DCM_IN1 PORTC.2
+#define DCM_IN2 PORTC.3
+#define STEP_MOTOR PORTE
+#define STEP_LED PORTD
+</span>
+<span class="cp">#asm
+</span>    <span class="p">.</span><span class="n">equ</span> <span class="n">__lcd_port</span><span class="o">=</span><span class="mh">0x1B</span>
+<span class="cp">#endasm
+</span>
+</code></pre></div></div>
+
+<p>처음부터 살펴보면 <code class="highlighter-rouge">&lt;mega128.h&gt;</code> 와 <code class="highlighter-rouge">&lt;lcd.h&gt;</code> 라이브러리를 통하여 atmega128 명령어를 include하여 명령어를 사용했었습니다.<br /></p>
+
+<p>그 이후에 필요한 기능의 포트들을 쉬운 변수로 정의해서 사용했었네요.<br />
+또한 LCD 포트는 따로 어셈블리어를 적어서 사용한것을 볼 수 있습니다.</p>
+
+<div class="language-c highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kt">int</span> <span class="n">i</span><span class="o">=</span><span class="mi">0</span><span class="p">,</span> <span class="n">Score</span><span class="o">=</span><span class="mi">0</span><span class="p">;</span>
+<span class="kt">char</span> <span class="n">obs</span><span class="p">;</span> <span class="c1">//장애물</span>
+<span class="kt">int</span> <span class="n">fnd1000</span><span class="p">,</span><span class="n">fnd100</span><span class="p">,</span><span class="n">fnd10</span><span class="p">,</span><span class="n">fnd1</span><span class="p">;</span>
+<span class="kt">int</span> <span class="n">remainder</span><span class="p">;</span>
+<span class="kt">unsigned</span> <span class="n">fnd</span><span class="p">[</span><span class="mi">17</span><span class="p">]</span><span class="o">=</span><span class="p">{</span><span class="mh">0xc0</span><span class="p">,</span><span class="mh">0xf9</span><span class="p">,</span><span class="mh">0xa4</span><span class="p">,</span><span class="mh">0xb0</span><span class="p">,</span><span class="mh">0x99</span><span class="p">,</span><span class="mh">0x92</span><span class="p">,</span><span class="mh">0x82</span><span class="p">,</span><span class="mh">0xd8</span><span class="p">,</span><span class="mh">0x80</span><span class="p">,</span><span class="mh">0x98</span><span class="p">,</span><span class="mh">0x88</span><span class="p">,</span><span class="mh">0x83</span><span class="p">,</span><span class="mh">0xc6</span><span class="p">,</span><span class="mh">0xa1</span><span class="p">,</span><span class="mh">0x86</span><span class="p">,</span><span class="mh">0x8e</span><span class="p">,</span><span class="mh">0x7f</span><span class="p">,};</span>
+
+<span class="kt">void</span> <span class="nf">init</span><span class="p">(</span><span class="kt">void</span><span class="p">)</span>
+<span class="p">{</span>
+    <span class="c1">// PORTA LCD</span>
+    <span class="n">PORTA</span><span class="o">=</span><span class="mh">0x00</span><span class="p">;</span>
+    <span class="n">DDRA</span><span class="o">=</span><span class="mh">0xFF</span><span class="p">;</span>
+    <span class="c1">// PORTB LED</span>
+    <span class="n">PORTB</span><span class="o">=</span><span class="mh">0x00</span><span class="p">;</span>
+    <span class="n">DDRB</span><span class="o">=</span><span class="mh">0xff</span><span class="p">;</span>
+      
+    <span class="c1">// PORTC 0,1 : 스위치 2, 3 : DC모터 4,5,6,7 : 7-segment Q</span>
+    <span class="n">PORTC</span><span class="o">=</span><span class="mh">0x00</span><span class="p">;</span>
+    <span class="n">DDRC</span><span class="o">=</span><span class="mh">0xF0</span><span class="p">;</span>
+    <span class="n">PINC</span><span class="o">=</span><span class="mh">0x00</span><span class="p">;</span>
+    <span class="c1">// PORTD STEP_MOTOR LED</span>
+    <span class="n">PORTD</span><span class="o">=</span><span class="mh">0x00</span><span class="p">;</span>
+    <span class="n">DDRD</span><span class="o">=</span><span class="mh">0xFF</span><span class="p">;</span>
+    <span class="c1">// PORTF STEP_MOTOR Data</span>
+    <span class="n">PORTF</span><span class="o">=</span><span class="mh">0X00</span><span class="p">;</span>
+    <span class="n">DDRF</span><span class="o">=</span><span class="mh">0XFF</span><span class="p">;</span>
+    <span class="c1">// PORTE 7-segment Data</span>
+    <span class="n">PORTE</span><span class="o">=</span><span class="mh">0x00</span><span class="p">;</span>
+    <span class="n">DDRE</span><span class="o">=</span><span class="mh">0xFF</span><span class="p">;</span>
+    
+    <span class="n">FND</span> <span class="o">=</span> <span class="n">fnd</span><span class="p">[</span><span class="mi">0</span><span class="p">];</span>
+    <span class="n">Q0</span> <span class="o">=</span> <span class="mi">1</span><span class="p">;</span>
+    <span class="n">Q1</span> <span class="o">=</span> <span class="mi">1</span><span class="p">;</span>
+    <span class="n">Q2</span> <span class="o">=</span> <span class="mi">1</span><span class="p">;</span>
+    <span class="n">Q3</span> <span class="o">=</span> <span class="mi">1</span><span class="p">;</span>
+<span class="p">}</span>
+</code></pre></div></div>
+
+<p>계속해서 필요한 전역변수를 선언해주었고 여기서 <code class="highlighter-rouge">usigned fnd[]</code> 는 7-segments를 쉽게 사용할 수 있도록 선언한 것을 볼 수 있습니다.<br /></p>
+
+<p>그리고 최대한 기능을 많은 기능(LCD, Motor 등..)을 넣기위해서 포트를 하나하나 핀별로 사용했었습니다. 그래서 초기화 함수를 따로 만들어서 포트의 초기값과 변수의 초기값을 각각 선언한것을 볼 수 있습니다.<br /></p>
+
+<p>이제 메인함수를 들어가기전에 메인 뒤에 선언해놓은 함수들을 먼저 리뷰해보겠습니다.</p>
+
+<div class="language-c highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kt">void</span> <span class="nf">display</span><span class="p">(</span><span class="kt">int</span><span class="p">);</span> <span class="c1">// 7-segment</span>
+<span class="kt">void</span> <span class="nf">DC_M_CW</span><span class="p">();</span>  <span class="c1">//  DC MOTOR 작동</span>
+<span class="kt">void</span> <span class="nf">DC_M_STOP</span><span class="p">();</span> <span class="c1">//  DC STOP </span>
+<span class="kt">void</span> <span class="nf">Addmap</span><span class="p">(</span><span class="kt">char</span> <span class="p">[]</span> <span class="p">,</span> <span class="kt">char</span><span class="p">);</span> <span class="c1">// 맵 업데이트</span>
+<span class="kt">void</span> <span class="nf">STEP_M_CW</span><span class="p">();</span>   <span class="c1">// STEP MOTOR </span>
+<span class="kt">void</span> <span class="nf">STEP_M_STOP</span><span class="p">();</span>   <span class="c1">// STEP STOP</span>
+<span class="kt">void</span> <span class="nf">STEP_M_CCW</span><span class="p">();</span>
+
+<span class="kt">void</span> <span class="nf">Addmap</span><span class="p">(</span><span class="kt">char</span> <span class="n">cur</span><span class="p">[],</span> <span class="kt">char</span> <span class="n">randC</span><span class="p">)</span>
+<span class="p">{</span>        
+    <span class="k">for</span> <span class="p">(</span><span class="n">i</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span> <span class="n">i</span><span class="o">&lt;</span><span class="n">mapsize</span> <span class="o">-</span> <span class="mi">2</span><span class="p">;</span> <span class="n">i</span><span class="o">++</span><span class="p">)</span>
+    <span class="p">{</span>
+        <span class="n">cur</span><span class="p">[</span><span class="n">i</span><span class="p">]</span> <span class="o">=</span> <span class="n">cur</span><span class="p">[</span><span class="n">i</span> <span class="o">+</span> <span class="mi">1</span><span class="p">];</span>
+
+    <span class="p">}</span>
+    <span class="n">cur</span><span class="p">[</span><span class="n">mapsize</span><span class="o">-</span><span class="mi">2</span><span class="p">]</span> <span class="o">=</span> <span class="n">randC</span><span class="p">;</span>
+<span class="p">}</span>
+<span class="kt">void</span> <span class="nf">display</span><span class="p">(</span><span class="kt">int</span> <span class="n">Scor</span><span class="p">){</span>
+    <span class="n">Score</span> <span class="o">+=</span> <span class="mi">50</span><span class="p">;</span>
+    <span class="n">fnd1000</span> <span class="o">=</span> <span class="n">Scor</span><span class="o">/</span><span class="mi">1000</span><span class="p">;</span>
+    <span class="n">remainder</span> <span class="o">=</span> <span class="n">Scor</span><span class="o">%</span><span class="mi">1000</span><span class="p">;</span>
+    <span class="n">fnd100</span> <span class="o">=</span> <span class="n">remainder</span><span class="o">/</span><span class="mi">100</span><span class="p">;</span>
+    <span class="n">remainder</span> <span class="o">=</span> <span class="n">Scor</span><span class="o">%</span><span class="mi">100</span><span class="p">;</span>
+    <span class="n">fnd10</span> <span class="o">=</span> <span class="n">remainder</span><span class="o">/</span><span class="mi">10</span><span class="p">;</span>
+    <span class="n">remainder</span> <span class="o">=</span> <span class="n">Scor</span><span class="o">%</span><span class="mi">10</span><span class="p">;</span>
+    <span class="n">fnd1</span> <span class="o">=</span> <span class="n">remainder</span><span class="p">;</span>
+    <span class="k">for</span> <span class="p">(</span><span class="n">i</span><span class="o">=</span><span class="mi">0</span><span class="p">;</span><span class="n">i</span><span class="o">&lt;</span><span class="mi">50</span><span class="p">;</span><span class="n">i</span><span class="o">++</span><span class="p">)</span>
+    <span class="p">{</span>
+        <span class="k">if</span> <span class="p">(</span><span class="n">Scor</span> <span class="o">&gt;=</span> <span class="mi">1000</span><span class="p">)</span>
+        <span class="p">{</span>
+            <span class="n">FND</span> <span class="o">=</span> <span class="n">fnd</span><span class="p">[</span><span class="n">fnd1000</span><span class="p">];</span>
+            <span class="n">Q3</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span>
+            <span class="n">Q2</span> <span class="o">=</span> <span class="mi">1</span><span class="p">;</span>
+            <span class="n">Q1</span> <span class="o">=</span> <span class="mi">1</span><span class="p">;</span>
+            <span class="n">Q0</span> <span class="o">=</span> <span class="mi">1</span><span class="p">;</span>
+            <span class="n">delay_ms</span><span class="p">(</span><span class="mi">10</span><span class="p">);</span>
+        <span class="p">}</span>
+        <span class="k">if</span> <span class="p">(</span><span class="n">Scor</span> <span class="o">&gt;=</span> <span class="mi">100</span><span class="p">)</span>
+        <span class="p">{</span>
+            <span class="n">FND</span> <span class="o">=</span> <span class="n">fnd</span><span class="p">[</span><span class="n">fnd100</span><span class="p">];</span>
+            <span class="n">Q3</span> <span class="o">=</span> <span class="mi">1</span><span class="p">;</span>
+            <span class="n">Q2</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span>
+            <span class="n">Q1</span> <span class="o">=</span> <span class="mi">1</span><span class="p">;</span>
+            <span class="n">Q0</span> <span class="o">=</span> <span class="mi">1</span><span class="p">;</span>
+            <span class="n">delay_ms</span><span class="p">(</span><span class="mi">10</span><span class="p">);</span>
+        <span class="p">}</span>
+        <span class="n">FND</span> <span class="o">=</span> <span class="n">fnd</span><span class="p">[</span><span class="n">fnd10</span><span class="p">];</span>
+        <span class="n">Q3</span> <span class="o">=</span> <span class="mi">1</span><span class="p">;</span>
+        <span class="n">Q2</span> <span class="o">=</span> <span class="mi">1</span><span class="p">;</span>
+        <span class="n">Q1</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span>
+        <span class="n">Q0</span> <span class="o">=</span> <span class="mi">1</span><span class="p">;</span>
+        <span class="n">delay_ms</span><span class="p">(</span><span class="mi">10</span><span class="p">);</span>
+        <span class="n">FND</span> <span class="o">=</span> <span class="n">fnd</span><span class="p">[</span><span class="n">fnd1</span><span class="p">];</span>
+        <span class="n">Q3</span> <span class="o">=</span> <span class="mi">1</span><span class="p">;</span>
+        <span class="n">Q2</span> <span class="o">=</span> <span class="mi">1</span><span class="p">;</span>
+        <span class="n">Q1</span> <span class="o">=</span> <span class="mi">1</span><span class="p">;</span>
+        <span class="n">Q0</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span>
+        <span class="n">delay_ms</span><span class="p">(</span><span class="mi">10</span><span class="p">);</span>
+    <span class="p">}</span>        
+    <span class="n">Q0</span> <span class="o">=</span> <span class="mi">1</span><span class="p">;</span>
+    <span class="n">Q1</span> <span class="o">=</span> <span class="mi">1</span><span class="p">;</span>
+    <span class="n">Q2</span> <span class="o">=</span> <span class="mi">1</span><span class="p">;</span>
+    <span class="n">Q3</span> <span class="o">=</span> <span class="mi">1</span><span class="p">;</span>    
+<span class="p">}</span>
+<span class="kt">void</span> <span class="nf">DC_M_CW</span><span class="p">()</span>
+<span class="p">{</span>
+    <span class="n">DCM_IN1</span> <span class="o">=</span> <span class="mi">1</span><span class="p">;</span>
+    <span class="n">DCM_IN2</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span>
+    <span class="n">delay_ms</span><span class="p">(</span><span class="mi">60</span><span class="p">);</span>
+<span class="p">}</span>
+
+<span class="kt">void</span> <span class="nf">DC_M_STOP</span><span class="p">()</span>
+<span class="p">{</span>
+    <span class="n">DCM_IN1</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span>
+    <span class="n">DCM_IN2</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span>
+<span class="p">}</span>
+
+<span class="kt">void</span> <span class="nf">STEP_M_CW</span><span class="p">()</span>
+<span class="p">{</span>
+
+    <span class="n">STEP_MOTOR</span> <span class="o">=</span> <span class="mh">0x01</span><span class="p">;</span>
+    <span class="n">STEP_LED</span> <span class="o">=</span> <span class="mh">0x01</span><span class="p">;</span>
+    <span class="n">delay_ms</span><span class="p">(</span><span class="mi">100</span><span class="p">);</span>
+    
+    <span class="n">STEP_MOTOR</span> <span class="o">=</span> <span class="mh">0x02</span><span class="p">;</span>
+    <span class="n">STEP_LED</span> <span class="o">=</span> <span class="mh">0x02</span><span class="p">;</span>
+    <span class="n">delay_ms</span><span class="p">(</span><span class="mi">100</span><span class="p">);</span>
+    
+    <span class="n">STEP_MOTOR</span> <span class="o">=</span> <span class="mh">0x04</span><span class="p">;</span>
+    <span class="n">STEP_LED</span> <span class="o">=</span> <span class="mh">0x04</span><span class="p">;</span>
+    <span class="n">delay_ms</span><span class="p">(</span><span class="mi">100</span><span class="p">);</span>
+    
+    <span class="n">STEP_MOTOR</span> <span class="o">=</span> <span class="mh">0x08</span><span class="p">;</span>
+    <span class="n">STEP_LED</span> <span class="o">=</span> <span class="mh">0x08</span><span class="p">;</span>
+    <span class="n">delay_ms</span><span class="p">(</span><span class="mi">100</span><span class="p">);</span>
+    
+<span class="p">}</span>
+<span class="kt">void</span> <span class="nf">STEP_M_CCW</span><span class="p">()</span>
+<span class="p">{</span>
+
+    <span class="n">STEP_MOTOR</span> <span class="o">=</span> <span class="mh">0x08</span><span class="p">;</span>
+    <span class="n">STEP_LED</span> <span class="o">=</span> <span class="mh">0x08</span><span class="p">;</span>
+    <span class="n">delay_ms</span><span class="p">(</span><span class="mi">100</span><span class="p">);</span>
+    
+    <span class="n">STEP_MOTOR</span> <span class="o">=</span> <span class="mh">0x04</span><span class="p">;</span>
+    <span class="n">STEP_LED</span> <span class="o">=</span> <span class="mh">0x04</span><span class="p">;</span>
+    <span class="n">delay_ms</span><span class="p">(</span><span class="mi">100</span><span class="p">);</span>
+    
+    <span class="n">STEP_MOTOR</span> <span class="o">=</span> <span class="mh">0x02</span><span class="p">;</span>
+    <span class="n">STEP_LED</span> <span class="o">=</span> <span class="mh">0x02</span><span class="p">;</span>
+    <span class="n">delay_ms</span><span class="p">(</span><span class="mi">100</span><span class="p">);</span>
+    
+    <span class="n">STEP_MOTOR</span> <span class="o">=</span> <span class="mh">0x01</span><span class="p">;</span>
+    <span class="n">STEP_LED</span> <span class="o">=</span> <span class="mh">0x01</span><span class="p">;</span>
+    <span class="n">delay_ms</span><span class="p">(</span><span class="mi">100</span><span class="p">);</span>
+    
+<span class="p">}</span>
+<span class="kt">void</span> <span class="nf">STEP_M_STOP</span><span class="p">()</span>
+<span class="p">{</span>
+    <span class="n">STEP_MOTOR</span> <span class="o">=</span> <span class="mh">0x00</span><span class="p">;</span>
+    <span class="n">STEP_LED</span> <span class="o">=</span> <span class="mh">0x00</span><span class="p">;</span>
+<span class="p">}</span>
+</code></pre></div></div>
+
+<div class="language-c highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kt">void</span> <span class="n">display</span><span class="p">(</span><span class="kt">int</span><span class="p">)</span>
+</code></pre></div></div>
+<p><code class="highlighter-rouge">display()</code> 함수는 미니게임에서 7-segments를 이용하여 사용자의 점수를 나타내는 기능입니다. (점프를 하면 점수를 잃고 장애물에 닿으면 점수를 잃는 기능을 넣었었습니다.)<br /></p>
+
+<div class="language-c highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kt">void</span> <span class="nf">DC_M_CW</span><span class="p">();</span>  <span class="c1">//  DC MOTOR 작동</span>
+<span class="kt">void</span> <span class="nf">DC_M_STOP</span><span class="p">();</span> <span class="c1">//  DC STOP </span>
+</code></pre></div></div>
+<p>DC Motor를 사용할 때는 적당한 delay를 주어서 속도를 조절해서 사용해야했었던 것을 기억이 납니다. 그래서 <code class="highlighter-rouge">DC_M_CW()</code> 에 딜레이를 넣어주어 Motor를 작동하였었고 그리고 <code class="highlighter-rouge">DC_M_STOP</code>을 이용해서 Motor를 멈추게 하였습니다. ( 점수를 얻으면 이펙트로 Motor를 작동하도록 하였습니다. )</p>
+
+<div class="language-c highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kt">void</span> <span class="nf">Addmap</span><span class="p">(</span><span class="kt">char</span> <span class="p">[]</span> <span class="p">,</span> <span class="kt">char</span><span class="p">);</span> <span class="c1">// 맵 업데이트</span>
+<span class="kt">void</span> <span class="nf">STEP_M_CW</span><span class="p">();</span>   <span class="c1">// STEP MOTOR </span>
+<span class="kt">void</span> <span class="nf">STEP_M_STOP</span><span class="p">();</span>   <span class="c1">// STEP STOP</span>
+<span class="kt">void</span> <span class="nf">STEP_M_CCW</span><span class="p">();</span>
+</code></pre></div></div>
+
+<p>나머지 함수를 살펴봅시다. <code class="highlighter-rouge">AddMap()</code> 함수는 함수명 그대로 맵을 만드는 명령어입니다. <br /></p>
+
+<p><code class="highlighter-rouge">STEP_</code>이 앞에 붙은 함수들은 STEP Motor를 작동하거나 정지시키는 함수들 입니다. STEP 모토를 이용하여 진행도를 표현하였었습니다.<br />
+<code class="highlighter-rouge">STEP_M_CW()</code>는 시계방향, <code class="highlighter-rouge">STEP_M_CW()</code>는 반시계방향으로 회전하며 진행도를 표현합니다. ( 여기서 진행도란 자신이 얼마나 장애물을 잘피하고 못피하고를 판단해주는 것을 얘기합니다. )<br />
+<code class="highlighter-rouge">STEP_M_STOP()</code>은 DC Motor와 마찬가지로 정지기능입니다.<br />
+( 일정 각도와 시간만큼 회전하고 멈추어야하기 때문에 Motor들은 모두 정지 기능이 필요합니다. )<br /></p>
+
+<div class="language-c highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kt">void</span> <span class="nf">main</span><span class="p">(){</span>
+    
+    <span class="kt">unsigned</span> <span class="kt">char</span> <span class="n">pName</span><span class="p">[]</span> <span class="o">=</span> <span class="p">{</span><span class="mi">0</span><span class="n">B11101111</span><span class="p">};</span> <span class="c1">// 캐릭터</span>
+    <span class="cm">/* 기본 맵 작성 */</span>
+    <span class="kt">char</span> <span class="n">map</span><span class="p">[</span><span class="mi">100</span><span class="p">]</span> <span class="o">=</span><span class="s">"__________________________"</span><span class="p">;</span>
+    <span class="n">map</span><span class="p">[</span><span class="mi">7</span><span class="p">]</span><span class="o">=</span><span class="mi">0</span><span class="n">b11111111</span><span class="p">;</span>
+    <span class="n">map</span><span class="p">[</span><span class="mi">11</span><span class="p">]</span><span class="o">=</span><span class="mi">0</span><span class="n">b11111111</span><span class="p">;</span>
+    <span class="n">map</span><span class="p">[</span><span class="mi">3</span><span class="p">]</span><span class="o">=</span><span class="mi">0</span><span class="n">b11111111</span><span class="p">;</span>
+   
+    <span class="n">init</span><span class="p">();</span>
+
+    <span class="n">lcd_init</span><span class="p">(</span><span class="mi">16</span><span class="p">);</span>
+    <span class="n">lcd_gotoxy</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span><span class="mi">1</span><span class="p">);</span>
+    <span class="n">lcd_puts</span><span class="p">(</span><span class="n">pName</span><span class="p">);</span>   
+    
+    <span class="n">lcd_gotoxy</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span><span class="mi">1</span><span class="p">);</span>
+    <span class="n">lcd_puts</span><span class="p">(</span><span class="n">map</span><span class="p">);</span>
+    <span class="n">delay_ms</span><span class="p">(</span><span class="mi">1000</span><span class="p">);</span>
+    
+    <span class="k">while</span><span class="p">(</span><span class="mi">1</span><span class="p">)</span>
+    <span class="p">{</span>   <span class="n">i</span> <span class="o">=</span> <span class="n">rand</span><span class="p">()</span><span class="o">%</span><span class="mi">10</span><span class="p">;</span>    <span class="c1">// 랜덤으로 장애물 생성 </span>
+        <span class="k">if</span> <span class="p">(</span> <span class="p">(</span><span class="n">i</span><span class="o">%</span><span class="mi">2</span><span class="p">)</span><span class="o">==</span><span class="mi">0</span><span class="p">)</span>
+        <span class="p">{</span>       
+            <span class="n">obs</span> <span class="o">=</span> <span class="mi">0</span><span class="n">b11111111</span><span class="p">;</span>
+        <span class="p">}</span>
+        <span class="k">else</span> <span class="k">if</span><span class="p">(</span> <span class="p">(</span><span class="n">i</span><span class="o">%</span><span class="mi">2</span><span class="p">)</span><span class="o">!=</span><span class="mi">0</span> <span class="p">)</span>
+        <span class="p">{</span>
+            <span class="n">obs</span> <span class="o">=</span> <span class="sc">'_'</span><span class="p">;</span>
+        <span class="p">}</span>
+        <span class="c1">// LCD 핸들링</span>
+        <span class="n">PORTB</span> <span class="o">=</span> <span class="mi">0</span><span class="n">b11111111</span><span class="p">;</span>
+        <span class="n">lcd_gotoxy</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span><span class="mi">0</span><span class="p">);</span>
+        <span class="n">lcd_puts</span><span class="p">(</span><span class="s">" "</span><span class="p">);</span>
+        <span class="n">lcd_gotoxy</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span><span class="mi">1</span><span class="p">);</span>
+        <span class="n">lcd_puts</span><span class="p">(</span><span class="n">pName</span><span class="p">);</span> 
+        
+        <span class="n">lcd_gotoxy</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span><span class="mi">1</span><span class="p">);</span>
+        <span class="n">Addmap</span><span class="p">(</span><span class="n">map</span><span class="p">,</span><span class="n">obs</span><span class="p">);</span>
+        
+        <span class="n">lcd_puts</span><span class="p">(</span><span class="n">map</span><span class="p">);</span>
+        <span class="n">delay_ms</span><span class="p">(</span><span class="mi">1000</span><span class="p">);</span>
+        
+        <span class="k">if</span> <span class="p">(</span><span class="n">PINC</span><span class="p">.</span><span class="mi">0</span> <span class="o">==</span> <span class="mi">0</span><span class="p">)</span>
+        <span class="p">{</span>   
+            <span class="n">lcd_gotoxy</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span><span class="mi">1</span><span class="p">);</span>
+            <span class="n">lcd_puts</span><span class="p">(</span><span class="s">" "</span><span class="p">);</span>
+            <span class="n">lcd_gotoxy</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span><span class="mi">0</span><span class="p">);</span>
+            <span class="n">lcd_puts</span><span class="p">(</span><span class="n">pName</span><span class="p">);</span>
+            <span class="k">if</span> <span class="p">(</span><span class="n">map</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="o">==</span><span class="mi">0</span><span class="n">b11111111</span><span class="p">)</span>
+            <span class="p">{</span>
+                <span class="n">PORTB</span> <span class="o">=</span> <span class="mi">0</span><span class="n">b00001111</span><span class="p">;</span>
+                <span class="n">display</span><span class="p">(</span><span class="n">Score</span><span class="p">);</span>
+                <span class="n">STEP_M_CW</span><span class="p">();</span>
+            <span class="p">}</span>
+            <span class="n">delay_ms</span><span class="p">(</span><span class="mi">1000</span><span class="p">);</span>
+        <span class="p">}</span>
+        <span class="k">else</span>
+        <span class="p">{</span>
+            <span class="k">if</span> <span class="p">(</span><span class="n">map</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="o">==</span><span class="mi">0</span><span class="n">b11111111</span><span class="p">)</span>
+            <span class="p">{</span>   
+                
+                <span class="n">PORTB</span> <span class="o">=</span> <span class="mi">0</span><span class="n">b11110000</span><span class="p">;</span>
+                <span class="n">DC_M_CW</span><span class="p">();</span>
+                <span class="n">DC_M_STOP</span><span class="p">();</span>
+                <span class="n">STEP_M_CCW</span><span class="p">();</span>
+                 <span class="k">if</span><span class="p">(</span><span class="n">Score</span> <span class="o">&gt;=</span><span class="mi">100</span><span class="p">)</span>
+                 <span class="n">Score</span> <span class="o">-=</span> <span class="mi">100</span><span class="p">;</span>               
+            <span class="p">}</span>
+        <span class="p">}</span>                                          
+    <span class="p">}</span>          
+<span class="p">}</span>
+</code></pre></div></div>
+
+<p>이제 마지막으로 Main 함수의 코드를 살펴봅시다.<br /></p>
+
+<p>처음에 캐릭터와 맵을 미리 선언해주었습니다. 그 다음으로 전체적인 장애물을 포함한 맵이 왼쪽으로 한칸 움직입니다. <br /></p>
+
+<p>그리고 이제 While문을 살펴보면 난수를 생성하고 난수가 짝수이면 장애물을 생성하여 맵에 넣는 방식으로 구현되어있는 것을 볼 수 있습니다. <br />
+(사실 이 난수는 계속 일정한 값을 생성합니다. 현재 시간을 이용하여 난수를 생성하여야하는데 그것이 불가능해서 그렇습니다. 그렇기 때문에 게임을 다시 시작하면 계속해서 같은 맵을 체험할 수 밖에 없는 구조입니다.)<br /></p>
+
+<p>LCD 명령어를 활용하여 한칸씩 계속 움직이는 것을 표현하는 하였고 맵에 계속해서 추가해서 맵을 저장하였습니다. <br /></p>
+
+<p>그 다음으로 if 문을 보면 PORTC를 이용하여 스위치의 값 ( 캐릭터가 점프를 뛰었는 가?)과 맵을 비교하여 장애물과 캐릭터가 부딪히게 되는 지 판단하여 점수를 올리거나 내렸고 DC Motor와 STEP Motor를 핸들링 했습니다 . 그리고 계속해서 while문을 통해서 반복되고 게임은 계속 진행됩니다. <br /></p>
+
+<p>이렇게 장애물을 피하는 미니게임을 구현했었습니다.</p>
+
+<p>다시 살펴보니 허접하지만 나름 재미있게 구현했던것 같습니다. atmega128를 사용하려는 사람들에게 제 프로젝트가 조금은 도움이 되었었으면 좋겠네요.</p>
+
+<p>이상으로 Atmega128 Review는 여기까지 하겠습니다.</p>
+
+:ET
