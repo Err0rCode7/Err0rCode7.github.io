@@ -20,6 +20,7 @@ github_username: Err0rCode7
 disqus_username:
 
 # Build settings
+category_list: [ Diary, Projects, Reviews ]
 markdown: kramdown
 permalink: /:categories/:year/:month/:day/:title:output_ext
 

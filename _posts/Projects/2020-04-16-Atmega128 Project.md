@@ -5,7 +5,7 @@ title:  "Atmega128를 활용한 간단한 게임만들기 프로젝트"
 crawlertitle: "Atmega 128 프로젝트"
 summary: "Atmega 128 프로젝트"
 date: 2020-04-16 16:30:00 +0900
-categories: Projects
+category: Projects
 author: Err0rCode7
 ---
 
