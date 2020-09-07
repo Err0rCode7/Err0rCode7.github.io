@@ -5,7 +5,7 @@ title:  "Github 블로그를 만들다. Jekyll 그리고 utterances"
 crawlertitle: "Github.io 만들기"
 summary: "github 블로그 만들기"
 date: 2020-04-09 21:06:07 +0900
-categories: Diary
+category: Diary
 author: Err0rCode7
 ---
 
