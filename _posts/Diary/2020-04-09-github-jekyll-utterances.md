@@ -1,5 +1,5 @@
 ---
-bg: "owl.jpg"
+bg: "Diary.jpg"
 layout: post
 title:  "Github 블로그를 만들다. Jekyll 그리고 utterances"
 crawlertitle: "Github.io 만들기"

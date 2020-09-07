@@ -5,7 +5,6 @@ permalink: /Projects/
 category: Project
 title: "Projects"
 crawlertitle: "Projects from Err0rCode7"
-summary: "Projects"
 active: Projects
 ---
 {% for post in site.posts %}
