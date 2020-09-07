@@ -7,8 +7,8 @@
     <a class="blog-logo" href="{{ site.baseurl }}/">{{ site.title }}</a>
 
     <!--{% for my_page in site.pages %}
-	
-		
+
+
 	{% if my_page.active == "develop" %}
 	-->
 	<div class="site-category" >
@@ -16,8 +16,10 @@
 			<li><a href="/">DEVELOP</a>
 				<ul>
 				<div class="opacity">
-					<li><a href="/Projects">Projects</a></li>
 					<li><a href="/Diary">Diary</a></li>
+					<li><a href="/Projects">Projects</a></li>
+					<li><a href="/Reviews">Diary</a></li>
+					<li><a href="/Algorithm">Diary</a></li>
 				</div>
 				</ul>
 			</li>
@@ -31,9 +33,9 @@
 	<!--	{% endif %}
 	{% if my_page.active and my_page.active != "develop" %}
 	-->
-	
-	
-	
+
+
+
 	<!--
 	<a href="{{ my_page.url | prepend: site.baseurl }}">{{ my_page.title }}</a>
 		{% endif %}
