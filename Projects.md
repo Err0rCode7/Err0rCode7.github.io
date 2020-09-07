@@ -2,7 +2,7 @@
 bg: "Projects.jpg"
 layout: page
 permalink: /Projects/
-category: Project
+category: Projects
 title: "Projects"
 crawlertitle: "Projects from Err0rCode7"
 active: Projects
