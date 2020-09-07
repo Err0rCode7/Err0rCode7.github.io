@@ -1,12 +1,11 @@
 ---
-bg: "tools.jpg"
+bg: "Projects.jpg"
 layout: post
 title:  "Atmega128를 활용한 간단한 게임만들기 프로젝트"
 crawlertitle: "Atmega 128 프로젝트"
 summary: "Atmega 128 프로젝트"
 date: 2020-04-16 16:30:00 +0900
 categories: Projects
-tags: 
 author: Err0rCode7
 ---
 
@@ -94,7 +93,7 @@ void init(void)
     // PORTB LED
     PORTB=0x00;
     DDRB=0xff;
-      
+
     // PORTC 0,1 : 스위치 2, 3 : DC모터 4,5,6,7 : 7-segment Q
     PORTC=0x00;
     DDRC=0xF0;
@@ -108,7 +107,7 @@ void init(void)
     // PORTE 7-segment Data
     PORTE=0x00;
     DDRE=0xFF;
-    
+
     FND = fnd[0];
     Q0 = 1;
     Q1 = 1;
@@ -126,14 +125,14 @@ void init(void)
 ```c
 void display(int); // 7-segment
 void DC_M_CW();  //  DC MOTOR 작동
-void DC_M_STOP(); //  DC STOP 
+void DC_M_STOP(); //  DC STOP
 void Addmap(char [] , char); // 맵 업데이트
-void STEP_M_CW();   // STEP MOTOR 
+void STEP_M_CW();   // STEP MOTOR
 void STEP_M_STOP();   // STEP STOP
 void STEP_M_CCW();
 
 void Addmap(char cur[], char randC)
-{        
+{
     for (i = 0; i<mapsize - 2; i++)
     {
         cur[i] = cur[i + 1];
@@ -182,11 +181,11 @@ void display(int Scor){
         Q1 = 1;
         Q0 = 0;
         delay_ms(10);
-    }        
+    }
     Q0 = 1;
     Q1 = 1;
     Q2 = 1;
-    Q3 = 1;    
+    Q3 = 1;
 }
 void DC_M_CW()
 {
@@ -207,19 +206,19 @@ void STEP_M_CW()
     STEP_MOTOR = 0x01;
     STEP_LED = 0x01;
     delay_ms(100);
-    
+
     STEP_MOTOR = 0x02;
     STEP_LED = 0x02;
     delay_ms(100);
-    
+
     STEP_MOTOR = 0x04;
     STEP_LED = 0x04;
     delay_ms(100);
-    
+
     STEP_MOTOR = 0x08;
     STEP_LED = 0x08;
     delay_ms(100);
-    
+
 }
 void STEP_M_CCW()
 {
@@ -227,19 +226,19 @@ void STEP_M_CCW()
     STEP_MOTOR = 0x08;
     STEP_LED = 0x08;
     delay_ms(100);
-    
+
     STEP_MOTOR = 0x04;
     STEP_LED = 0x04;
     delay_ms(100);
-    
+
     STEP_MOTOR = 0x02;
     STEP_LED = 0x02;
     delay_ms(100);
-    
+
     STEP_MOTOR = 0x01;
     STEP_LED = 0x01;
     delay_ms(100);
-    
+
 }
 void STEP_M_STOP()
 {
@@ -251,17 +250,17 @@ void STEP_M_STOP()
 ```c
 void display(int)
 ```
-`display()` 함수는 미니게임에서 7-segments를 이용하여 사용자의 점수를 나타내는 기능입니다. (점프를 하면 점수를 잃고 장애물에 닿으면 점수를 잃는 기능을 넣었었습니다.)<br> 
+`display()` 함수는 미니게임에서 7-segments를 이용하여 사용자의 점수를 나타내는 기능입니다. (점프를 하면 점수를 잃고 장애물에 닿으면 점수를 잃는 기능을 넣었었습니다.)<br>
 
 ```c
 void DC_M_CW();  //  DC MOTOR 작동
-void DC_M_STOP(); //  DC STOP 
+void DC_M_STOP(); //  DC STOP
 ```
 DC Motor를 사용할 때는 적당한 delay를 주어서 속도를 조절해서 사용해야했었던 것이 기억이 납니다. 그래서 `DC_M_CW()` 에 딜레이를 넣어주어 Motor를 작동하였었고 그리고 `DC_M_STOP`을 이용해서 Motor를 멈추게 하였습니다. ( 점수를 얻으면 이펙트로 Motor를 작동하도록 하였습니다. )
 
 ```c
 void Addmap(char [] , char); // 맵 업데이트
-void STEP_M_CW();   // STEP MOTOR 
+void STEP_M_CW();   // STEP MOTOR
 void STEP_M_STOP();   // STEP STOP
 void STEP_M_CCW();
 ```
@@ -275,28 +274,28 @@ void STEP_M_CCW();
 
 ```c
 void main(){
-    
+
     unsigned char pName[] = {0B11101111}; // 캐릭터
     /* 기본 맵 작성 */
     char map[100] ="__________________________";
     map[7]=0b11111111;
     map[11]=0b11111111;
     map[3]=0b11111111;
-   
+
     init();
 
     lcd_init(16);
     lcd_gotoxy(0,1);
-    lcd_puts(pName);   
-    
+    lcd_puts(pName);
+
     lcd_gotoxy(1,1);
     lcd_puts(map);
     delay_ms(1000);
-    
+
     while(1)
-    {   i = rand()%10;    // 랜덤으로 장애물 생성 
+    {   i = rand()%10;    // 랜덤으로 장애물 생성
         if ( (i%2)==0)
-        {       
+        {
             obs = 0b11111111;
         }
         else if( (i%2)!=0 )
@@ -308,16 +307,16 @@ void main(){
         lcd_gotoxy(1,0);
         lcd_puts(" ");
         lcd_gotoxy(0,1);
-        lcd_puts(pName); 
-        
+        lcd_puts(pName);
+
         lcd_gotoxy(1,1);
         Addmap(map,obs);
-        
+
         lcd_puts(map);
         delay_ms(1000);
-        
+
         if (PINC.0 == 0)
-        {   
+        {
             lcd_gotoxy(0,1);
             lcd_puts(" ");
             lcd_gotoxy(1,0);
@@ -333,17 +332,17 @@ void main(){
         else
         {
             if (map[0]==0b11111111)
-            {   
-                
+            {
+
                 PORTB = 0b11110000;
                 DC_M_CW();
                 DC_M_STOP();
                 STEP_M_CCW();
                  if(Score >=100)
-                 Score -= 100;               
+                 Score -= 100;
             }
-        }                                          
-    }          
+        }
+    }
 }
 ```
 

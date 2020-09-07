@@ -1,5 +1,5 @@
 ---
-bg: "tools.jpg"
+bg: "Projects.jpg"
 layout: page
 permalink: /Projects/
 category: Project

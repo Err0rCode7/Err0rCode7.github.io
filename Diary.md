@@ -1,5 +1,5 @@
 ---
-bg: "owl.jpg"
+bg: "Diary.jpg"
 layout: page
 permalink: /Diary/
 category: Diary

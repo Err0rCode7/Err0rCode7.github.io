@@ -6,7 +6,6 @@ crawlertitle: "Github.io 만들기"
 summary: "github 블로그 만들기"
 date: 2020-04-09 21:06:07 +0900
 categories: Diary
-tags: 
 author: Err0rCode7
 ---
 
@@ -141,9 +140,9 @@ jekyll은 이 폴더에 yyyy-mm-dd-title.md 형식으로 마크다운을 입력�
 예시 마크다운 파일을 가져와봤습니다.<br>
 
 마크다운에 상단에 보면 테두리로 여러 객체가 묶여있는 것을 볼 수 있습니다.<br>
-이 객체들이 html파일( 테마 )에 적용되어 게시글을 표현한다고 보시면 됩니다. <br> 
+이 객체들이 html파일( 테마 )에 적용되어 게시글을 표현한다고 보시면 됩니다. <br>
 
-bg는 배경사진, layout은 말 그대로 마크다운 파일이 어떤 레이아웃으로 포스팅이 될지 정해주는 것입니다.<br> 
+bg는 배경사진, layout은 말 그대로 마크다운 파일이 어떤 레이아웃으로 포스팅이 될지 정해주는 것입니다.<br>
 
 html 형태의 layout이 있고 틀안에 마크다운에 적은 게시글 내용이 쏘옥 들어간다고 보시면 됩니다. <br>
 ( 실제로 post.html에 `content` 객체에 들어갑니다. )
@@ -206,7 +205,7 @@ Github issue 기반을 이용해서 댓글을 작성할 수 있는 오픈소스 
 ( 저는 따로 blog-comment라는 repository를 만들어서 관리를 하고있습니다. )<br>
 
 그 다음으로 해당 repository에 utterances 깃허브 앱을 설치해줘야 합니다. <br>
-[utterances app](https://github.com/apps/utterances) 
+[utterances app](https://github.com/apps/utterances)
 링크에 들어가서 빠르게 진행해주시면 됩니다.
 
 이제 `repo:` 에 앱을 설치한 repository를 입력해주시면 됩니다.<br>
@@ -231,7 +230,7 @@ Github issue 기반을 이용해서 댓글을 작성할 수 있는 오픈소스 
 
 본인이 issue를 어떤식으로 관리할지 생각하여 선택해주시면 됩니다. <br>
 
-라벨은 본인의 이슈 뒤에 스티커(?)같은 것을 표시해주는 것입니다. <br> 
+라벨은 본인의 이슈 뒤에 스티커(?)같은 것을 표시해주는 것입니다. <br>
 원하는 단어를 넣어서 구분이 가능하게 사용할 수 있습니다.<br>
 
 이제 적용을 해봅시다.
