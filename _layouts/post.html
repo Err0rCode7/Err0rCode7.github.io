@@ -6,7 +6,7 @@ layout: default
   <h1 class="post-title">{{ page.title }}</h1>
 
   <p class="post-meta">
-    <time datetime="{{ page.date | date: "%Y-%m-%d" }}">{{ page.date | date: "%d-%m-%Y" }}</time>
+    <time datetime="{{ page.date | date: "%Y-%m-%d" }}">{{ page.date | date: "%Y-%m-%d" }}</time>
 
     {% if page.author %}
       &nbsp;/&nbsp;
@@ -26,7 +26,7 @@ layout: default
           <span class="link-to-post__title">{{ page.next.title }}</span>
         </a>
       {% endif %}
-      
+
       {% if page.previous.url %}
         <a class="link-to-post" href="{{ page.previous.url | relative_url}}">
           <span class="link-to-post__prev">&#10535; &nbsp;Previous post</span>
@@ -36,7 +36,7 @@ layout: default
     </div>
 
   </div>
-     
+
   <script src="https://utteranc.es/client.js"
   repo="Err0rCode7/blog-comment"
   issue-term="og:title"
@@ -45,6 +45,6 @@ layout: default
   crossorigin="anonymous"
   async>
   </script>
-  
+
 </article>
 
