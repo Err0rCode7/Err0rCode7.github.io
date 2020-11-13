@@ -20,7 +20,7 @@ github_username: Err0rCode7
 disqus_username:
 
 # Build settings
-category_list: [ Diary, Projects, Reviews, Algorithm ]
+category_list: [ Diary, Projects, Reviews, Algorithm, 42Seoul, 42Starter ]
 markdown: kramdown
 permalink: /:categories/:year/:month/:day/:title:output_ext
 
