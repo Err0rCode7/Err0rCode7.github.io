@@ -435,6 +435,6 @@ article {
 * Post content
 * ========================================================================== */
 
- p .post-content {
+.post-content > p  {
 	 text-align: justify;
  }
