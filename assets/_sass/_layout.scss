@@ -304,6 +304,7 @@ main {
 }
 
 article {
+  text-align: justify;
   padding: 2em 1em;
   img,
   embed,
@@ -430,11 +431,3 @@ article {
     display: block;
   }
 }
-
-/*
-* Post content
-* ========================================================================== */
-
-.post-content > p  {
-	 text-align: justify;
- }
