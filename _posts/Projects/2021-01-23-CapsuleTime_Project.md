@@ -99,9 +99,11 @@ https://github.com/Err0rCode7/capstone_project
 
 <p align="center">
 <img src="https://user-images.githubusercontent.com/48249549/84154362-f8de5b80-aaa1-11ea-8148-fa6e558ac04e.png">
+<p style="font-weight:bold" align="center">캡슐 로그 기능</p>
 </p>
 <p align="center">
 <img src="https://user-images.githubusercontent.com/48249549/83625774-72bca380-a5cf-11ea-9bcb-2b38580bf536.png">
+<p style="font-weight:bold" align="center">캡슐 로그 API</p>
 </p>
 
 get 같은 경우 캡슐 로그를 보는 곳에도 필요하지만 다른 팀원이 작업중인 AR 부분에서 몇 미터 이내에 캡슐에 대한 정보를 뿌려주는 api도 필요하고 지도에서 모든 캡슐의 위치를 보는 부분도 필요해서 추가적으로 더 작업이 필요했다. 안드로이드 작업 부분 또한 이미 통신 작업을 했던 경험이 있고 화면에 리스트를 보여주는 기본적인 코드 튜토리얼이 인터넷에 많이 있어서 어려움이 없었다.
