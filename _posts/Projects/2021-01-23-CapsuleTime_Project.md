@@ -103,13 +103,14 @@ author: Err0rCode7
 </p>
 <p align="center">
 <img src="https://user-images.githubusercontent.com/48249549/83625774-72bca380-a5cf-11ea-9bcb-2b38580bf536.png">
-<p style="font-weight:bold" align="center">캡슐 로그 API</p>
+<p style="font-weight:bold" align="center">캡슐 로그 Api</p>
 </p>
 
 get 같은 경우 캡슐 로그를 보는 곳에도 필요하지만 다른 팀원이 작업중인 AR 부분에서 몇 미터 이내에 캡슐에 대한 정보를 뿌려주는 api도 필요하고 지도에서 모든 캡슐의 위치를 보는 부분도 필요해서 추가적으로 더 작업이 필요했다. 안드로이드 작업 부분 또한 이미 통신 작업을 했던 경험이 있고 화면에 리스트를 보여주는 기본적인 코드 튜토리얼이 인터넷에 많이 있어서 어려움이 없었다.
 
 <p align="center">
 <img src="https://user-images.githubusercontent.com/48249549/84855612-72c4a500-b09f-11ea-956c-1bf2a460df70.png">
+<p style="font-weight:bold" align="center">UI/UX 개발</p>
 </p>
 
 로그인과 캡슐 로그 부분이 끝나는 동안 원래 안드로이드 앱 부분을 맡았던 팀원이 GUI 디자인을 진행하고 있었고 나는 캡슐 로그 기능이 구현됨과 완성된 GUI를 갖고 UI/UX 작업을 진행했다. 이 작업에서 레이아웃에 대한 비율 개념이 없었던터라 고정된 픽셀 값으로 마진, 패딩등을 작업을 해서 나중에 전체적으로 다시 수정한 기억이 있다.
