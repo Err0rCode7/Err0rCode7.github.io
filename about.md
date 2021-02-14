@@ -12,9 +12,15 @@ active: about
 ---
 
 - ## Err0rCode7
-충북대학교 컴퓨터공학과에 4학년으로 재학중인 전승원입니다.<Br>
-IoT, 인공지능, SW 개발에 관심을 갖고 꾸준히 노력해 나가는 개발자 중 한명입니다.<br>
-많은 사람들이 이용하는 SW를 만드는 것이 꿈인 초보 개발자입니다.	&#128516;<br><br>
+
+**전승원**
+<br>
+
+**충북대학교 컴퓨터공학과 졸업**<br>
+**42 Seoul 본과정 진행중**<br>
+**C, node js, python 을 다루는 백엔드 개발자**
+<br>
+
 ![insta](/assets/images/insta.png){: width="20"}[{{ site.insta_username }}](https://www.instagram.com/_swerror/)
 ![github](/assets/images/github.png){: width="24"}[{{ site.github_username }}](https://github.com/Err0rCode7)
 ![email](/assets/images/email.png){: width="24"} {{ site.email }}
