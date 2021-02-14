@@ -8,6 +8,10 @@ date: 2021-01-23 23:00:00 +0900
 category: Projects
 author: Err0rCode7
 ---
+ 
+이번에는 작년 4월부터 시작하여 8월 말 마무리를 한 AR을 이용한 위치기반 서비스 모바일 앱 Capsule Time에 대한 회고를 포스팅 하고자 합니다.
+
+[Capsule Time github](https://github.com/Err0rCode7/capstone_project)
 
 ---
 ### 1. 시작 그리고 기획 📄
@@ -18,7 +22,7 @@ author: Err0rCode7
 어떤 재밌는 걸 만들까 들뜬 우리 팀은 여러가지 아이디어를 생각해서 모여 회의를 진행하도록 계획을 하였다. 거듭해서 회의를 진행하였지만 어떤 걸 해야할지 머릿속에꽂히는게 없었다. 그러던 중에 하나의 모바일 앱을 발견하였는데 바로 "사이버 폭력 백신" 앱이였다. 
 
 <p align="center">
-<img src="https://user-images.githubusercontent.com/48249549/105579095-b7e44e80-5dc7-11eb-9c59-bd52048ef0ec.png">
+<img src="https://user-images.githubusercontent.com/48249549/105579095-b7e44e80-5dc7-11eb-9c59-bd52048ef0ec.png" />
 <p style="font-weight:bold" align="center">사이버 폭력 백신 App</p>
 </p>
 
@@ -38,14 +42,14 @@ author: Err0rCode7
 회의 시간이 되고 우리 팀은 먼저 개발 기술 설계 이전에 필요한 앱 화면이 어느 것이 있고 앱 화면이 흘러가는지 전체적인 사용 흐름을 작성했다. 어떤 페이지가 필요할 지 생각해본 내용은 다음과 같았다. 로그인과 회원가입 화면, 자신의 타임 캡슐과 타임 캡슐의 날짜 등을 확인할 수 있는 화면, 지도로 확인할 수 있는 화면, AR로 직접 캡슐을 볼 수 있는 화면, 개인 프로필과 설정 화면이 필요했다. 그리고 이것을 토대로 아이패드를 이용해서 흐름을 작성했다.
 
 <p align="center">
-<img src="https://user-images.githubusercontent.com/48249549/105627334-b1161400-5e79-11eb-9f7e-1b28b2ebf07b.png">
+<img src="https://user-images.githubusercontent.com/48249549/105627334-b1161400-5e79-11eb-9f7e-1b28b2ebf07b.png" />
 <p style="font-weight:bold" align="center">설계 스케치</p>
 </p>
 
 전체적인 화면을 작성하니 어떤 화면에 어느 것이 들어가야할 지 보이기 시작했다. 그래서 다음으로 구체적으로 화면에는 어떤 것들이 있어야 하는지 와이어 프레임 형태로 스케치를 진행했다. 와이어 프레임을 하다보니 생각보다 해야할 것이 많았다. 그리고 추가하고싶은 다른 기능들이 떠올랐는데 하다보니 너무 방대해졌다. 그러다가 결국 덕지덕지 붙인 첨가물들을 다 제거하고 우리 아이디어의 장점을 최대한 살리는 방향으로 계속 이어나갔다.
 
 <p align="center">
-<img src="https://user-images.githubusercontent.com/48249549/105627611-35b56200-5e7b-11eb-8979-3d5614ff1717.png">
+<img src="https://user-images.githubusercontent.com/48249549/105627611-35b56200-5e7b-11eb-8979-3d5614ff1717.png" />
 <p style="font-weight:bold" align="center">기술 설계도</p>
 </p>
 
@@ -62,21 +66,21 @@ author: Err0rCode7
 이렇게 개발을 하다보니 express를 이용해서 어떻게 URL을 나누고 route 하는 지, mysql과 연결하여 하는 지를 알게 되었고 가장 필요하다고 생각한 DB 내용을 모델링을 해보았다.
 
 <p align="center">
-<img src="https://user-images.githubusercontent.com/48249549/105628322-8f1f9000-5e7f-11eb-820e-311e16e542ea.png">
+<img src="https://user-images.githubusercontent.com/48249549/105628322-8f1f9000-5e7f-11eb-820e-311e16e542ea.png" />
 <p style="font-weight:bold" align="center">DB 모델링</p>
 </p>
 
 여기까지 진행을 하고 다시 회의 시간이 되었다. 이번 회의때 모두가 어느 부분까지 공부와 개발을 하고 나온 결과가 어떤 것인지 공유를 했고 진행하면서 어려운 점에 대해서 얘기를 나누었다. 나는 서버 부분에서 rest api를 이용하여 어떻게 정보를 주고받는지에 대한 전체적인 틀을 설명했고 어떻게 통신해야 할지에 대한 내용을 말하여 방법을 결정했다. 그리고 다음 회의 전까지 어느 내용까지 해야할지를 정했는데 이 때부터 안드로이드 App에 같이 참여하게 되었다. 안드로이드 App 개발을 맡은 팀원이 어려움을 느끼기도 했고 rest api를 개발하고 테스트 할 때 안드로이드 App 개발을 같이 진행하면 좋기 때문에 그렇게 진행하게 되었다.
 
 <p align="center">
-<img src="https://user-images.githubusercontent.com/48249549/105632593-55f31a00-5e97-11eb-976b-a58d877e52d1.png">
+<img src="https://user-images.githubusercontent.com/48249549/105632593-55f31a00-5e97-11eb-976b-a58d877e52d1.png" />
 <p style="font-weight:bold" align="center">Api 개발 시작</p>
 </p>
 
 회의가 끝나고 나는 안드로이드 Java에 대해서도 공부를 하기 시작했다. 이미 node js에서 어려움을 많이 부딪혀서 그런지 Java 공부에서는 비교적 어려움이 덜 느껴졌다. 먼저 로그인과 회원가입 기능을 구현하는 것부터 시작을 했다. 레이아웃을 만들고 retrofit2를 이용해서 url에 원하는 요청을 하는 식으로 진행을 했고 받아온 유저 정보가 DB와 같은 지(로그인) 확인 하는 EndPoint와 user 정보를 받아와 DB에 저장하는(회원가입) EndPoint, 유저 정보를 수정하는 EndPoint, 삭제하는 EndPoint를 rest api로 구성을 완료했다. 이렇게 Json을 이용해서 rest api로 통신하는 시스템을 익히고 나니 다른 것들도 금방 할 수 있을 것 같은 느낌이 들었다.
 
 <p align="center">
-<img src="https://user-images.githubusercontent.com/48249549/105633313-32ca6980-5e9b-11eb-97bf-b5b4f5a638b5.png">
+<img src="https://user-images.githubusercontent.com/48249549/105633313-32ca6980-5e9b-11eb-97bf-b5b4f5a638b5.png" />
 <p style="font-weight:bold" align="center">회원가입</p>
 </p>
 
@@ -94,18 +98,18 @@ author: Err0rCode7
 나는 먼저 캡슐 로그 만들기를 진행을 했다. 안드로이드 부분과 캡슐 로그 부분을 둘 다 만들어야 하다 보니 시간이 꽤나 오래 걸렸다. 처음에는 api 작업을 먼저 진행했다. 타임 캡슐 정보를 의미하는 캡슐 로그에 대한 get, post, put, delete를 모두 만들어야 했는데, 로그인과 회원가입을 만들 때 사진 정보를 보내는 작업의 경험이 있다보니 수월했다.
 
 <p align="center">
-<img src="https://user-images.githubusercontent.com/48249549/84154362-f8de5b80-aaa1-11ea-8148-fa6e558ac04e.png">
+<img src="https://user-images.githubusercontent.com/48249549/84154362-f8de5b80-aaa1-11ea-8148-fa6e558ac04e.png" />
 <p style="font-weight:bold" align="center">캡슐 로그 기능</p>
 </p>
 <p align="center">
-<img src="https://user-images.githubusercontent.com/48249549/83625774-72bca380-a5cf-11ea-9bcb-2b38580bf536.png">
+<img src="https://user-images.githubusercontent.com/48249549/83625774-72bca380-a5cf-11ea-9bcb-2b38580bf536.png" />
 <p style="font-weight:bold" align="center">캡슐 로그 Api</p>
 </p>
 
 get 같은 경우 캡슐 로그를 보는 곳에도 필요하지만 다른 팀원이 작업중인 AR 부분에서 몇 미터 이내에 캡슐에 대한 정보를 뿌려주는 api도 필요하고 지도에서 모든 캡슐의 위치를 보는 부분도 필요해서 추가적으로 더 작업이 필요했다. 안드로이드 작업 부분 또한 이미 통신 작업을 했던 경험이 있고 화면에 리스트를 보여주는 기본적인 코드 튜토리얼이 인터넷에 많이 있어서 어려움이 없었다.
 
 <p align="center">
-<img src="https://user-images.githubusercontent.com/48249549/84855612-72c4a500-b09f-11ea-956c-1bf2a460df70.png">
+<img src="https://user-images.githubusercontent.com/48249549/84855612-72c4a500-b09f-11ea-956c-1bf2a460df70.png" />
 <p style="font-weight:bold" align="center">UI/UX 개발</p>
 </p>
 
@@ -133,7 +137,7 @@ get 같은 경우 캡슐 로그를 보는 곳에도 필요하지만 다른 팀�
 발표가 끝나고 우리 팀은 받은 피드백을 바탕으로 이 내용에 대해서 회의를 했는데 결론은 우리 어플에서는 친구 기능을 굳이 만들 이유가 없었다. 그래서 우리 팀은 친구 기능을 넣고자 했을 때의 생각으로 다시 돌아가서 생각을 시작했다. 우리 팀이 친구 기능을 생각한 목적은 타임 캡슐을 혼자 만들 수 있겠지만 친구들과 특별한 추억을 공유하기 위함이었다. 잊고 있었던 핵심 목적을 다시 떠올릴 수 있게 되었고 그러기 위해서 `친구 기능을 어떻게 활용하면 좋을 까` 에 대해서 이야기를 나누어 보았다. 이야기가 된 내용으로 최종적으로 친구와 같이 타임 캡슐을 묻고 동일한 시점에 같이 열어볼 수 있는 기능을 떠올리게 되었다.
 
 <p align="center">
-<img src="https://user-images.githubusercontent.com/48249549/107145608-24457d00-6986-11eb-9256-c835dbeec1bd.png">
+<img src="https://user-images.githubusercontent.com/48249549/107145608-24457d00-6986-11eb-9256-c835dbeec1bd.png" />
 <p style="font-weight:bold" align="center">두 번째 설계 스케치 일부</p>
 </p>
 
