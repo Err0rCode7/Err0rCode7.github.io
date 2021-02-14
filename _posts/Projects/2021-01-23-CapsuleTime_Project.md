@@ -21,8 +21,3 @@ author: Err0rCode7
 
 어떤 재밌는 걸 만들까 들뜬 우리 팀은 여러가지 아이디어를 생각해서 모여 회의를 진행하도록 계획을 하였다. 거듭해서 회의를 진행하였지만 어떤 걸 해야할지 머릿속에꽂히는게 없었다. 그러던 중에 하나의 모바일 앱을 발견하였는데 바로 `사이버 폭력 백신` 앱이였다.
 
-<p align="center">
-	<img src="https://user-images.githubusercontent.com/48249549/105579095-b7e44e80-5dc7-11eb-9c59-bd52048ef0ec.png" />
-	<p style="font-weight:bold" align="center">사이버 폭력 백신 App</p>
-</p>
-
