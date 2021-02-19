@@ -22,6 +22,7 @@ disqus_username:
 # Build settings
 category_list: [ Diary, Projects, Reviews, Algorithm, 42Seoul, 42Starter ]
 markdown: kramdown
+highlighter: rouge
 permalink: /:categories/:year/:month/:day/:title:output_ext
 
 # Posts settings
