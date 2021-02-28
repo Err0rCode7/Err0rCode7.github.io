@@ -17,8 +17,7 @@ active: about
 
 > **충북대학교 컴퓨터공학과 졸업생**<br>
 > **42 Seoul 본과정생 (aka. seujeon)**<br>
-> **C, node js, python 을 다루는 백엔드 개발자**
-<br>
+> **C, node js, python 을 다루는 백엔드 개발자**<br>
 
 ![insta](/assets/images/insta.png){: width="20"}[{{ site.insta_username }}](https://www.instagram.com/_swerror/)
 ![github](/assets/images/github.png){: width="24"}[{{ site.github_username }}](https://github.com/Err0rCode7)
