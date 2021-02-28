@@ -1,5 +1,5 @@
 ---
-bg: "42seoul.jpg"
+bg: "42seoul.png"
 layout: page
 permalink: /42Seoul/
 category: 42Seoul
