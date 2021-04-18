@@ -82,12 +82,14 @@ textarea {
 pre {
   line-height: 1.5;
   border: 1px solid #ddd;
-  padding: 1em;
   background: #F9F8F6;
+  padding: 1em;
   margin: 2em 0;
   code {
-    background-color: transparent;
-    overflow: auto;
+    // background-color: transparent;
+	border: 1px solid #ddd;
+	background: #F9F8F6;
+	overflow: auto;
   }
 }
 
@@ -99,7 +101,6 @@ pre {
   -webkit-font-smoothing: auto;
   border: 1px solid #ddd;
   background: #F9F8F6;
-  background-color: transparent;
   overflow: auto;
 }
 
