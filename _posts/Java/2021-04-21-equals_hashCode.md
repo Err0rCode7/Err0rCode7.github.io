@@ -1,10 +1,10 @@
 ---
 bg: "Review.jpg"
 layout: post
-title:  "자바와 객체지향"
-crawlertitle: "자바와 객체지향"
-summary: "자바와 객체지향"
-date: 2021-04-21 00:00:00 +0900
+title:  "equals(), hashCode()"
+crawlertitle: "equals(), hashCode()"
+summary: "equals(), hashCode()"
+date: 2021-04-21 15:40:00 +0900
 category: Java
 author: Err0rCode7
 ---
