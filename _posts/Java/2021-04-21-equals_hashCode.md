@@ -58,7 +58,8 @@ hashCode 메소드의 일반 규약은 다음과 같다.
 <details>
   <summary> 접기 / 펼치기</summary>
   <div markdown="1">
-     ##### 해시 분포와 해시 충돌
+
+    ##### 해시 분포와 해시 충돌
 
 
     동일하지 않은 어떤 객체 X와 Y가 있을 때, 즉 `X.equals(Y)`가 거짓일 때 `X.hashCode() != Y.hashCode()` 가 같지 않다면, 이때 사용하는 해시 함수는 완전한 해시 함수라고 한다.
