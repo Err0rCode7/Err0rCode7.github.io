@@ -56,35 +56,33 @@ hashCode 메소드의 일반 규약은 다음과 같다.
 - HashTable에 get 메서드로 객체를 조회하는 경우, 값이 같은 객체가 있다면(equals()가 true) 그 객체를 리턴한다. 값이 같은 객체가 없다면 null을 리턴한다.
 
 <details>
-  <summary> 접기 / 펼치기</summary>
+  <summary> 👉 접기 / 펼치기 👈</summary>
   <div markdown="1">
+##### 해시 분포와 해시 충돌
 
-    ##### 해시 분포와 해시 충돌
 
+동일하지 않은 어떤 객체 X와 Y가 있을 때, 즉 `X.equals(Y)`가 거짓일 때 `X.hashCode() != Y.hashCode()` 가 같지 않다면, 이때 사용하는 해시 함수는 완전한 해시 함수라고 한다.
 
-    동일하지 않은 어떤 객체 X와 Y가 있을 때, 즉 `X.equals(Y)`가 거짓일 때 `X.hashCode() != Y.hashCode()` 가 같지 않다면, 이때 사용하는 해시 함수는 완전한 해시 함수라고 한다.
-    
-    Boolean같이 서로 구별되는 객체의 종류가 적거나, Integer, Long, Double 같은 Number 객체는 객체가 나타내려는 값 자체를 해시값으로 사용할 수 있기 때문에 완전한 해시 함수 대상으로 삼을 수 있다. 하지만 String이나 POJO(plain old java object)에 대하여 완전한 해시 함수를 제작하는 것은 사실상 불가능하다.
-    
-    적은 연산만으로 빠르게 동작할 수 있는 완전한 해시 함수가 있다고 하더라도, 그것을 HashMap에서 사용할 수 있는 것은 아니다. HashMap은 기본적으로 각 객체의 hashCode() 메서드가 반환하는 값을 사용하는 데, 결과 자료형은 int다. 32비트 정수 자료형으로는 완전한 자료 해시 함수를 만들 수 없다. 논리적으로 생성 가능한 객체의 수가 232보다 많을 수 있기 때문이며, 또한 모든 HashMap 객체에서 O(1)을 보장하기 위해 랜덤 접근이 가능하게 하려면 원소가 232인 배열을 모든 HashMap이 가지고 있어야 하기 때문이다.
-    
-    따라서 HashMap을 비롯한 많은 해시 함수를 이용하는 associative array 구현체에서는 메모리를 절약하기 위하여 실제 해시 함수의 표현 정수 범위 `|N|`보다 작은 M개의 원소가 있는 배열만을 사용한다. 따라서 다음과 같이 객체에 대한 해시 코드의 나머지 값을 해시 버킷 인덱스 값으로 사용한다.
-    
-    ```java
-    int index = X.hashCode() % M;
-    ```
-    
-    이렇게 사용을 하면 서로 다른 객체가 1/M의 확률로 같은 해시 버킷을 사용하게 된다. 이는 해시 함수가 얼마나 해시 충돌을 회피하도록 잘 구현되었느냐에 상관없이 발생할 수 있는 또 다른 종류의 해시 충돌이다. 이를 해결하는 방식은 대표적으로 두 가지가 있는데, 하나는 Open Addressing과 다른 하나는 Separate Chaning이다. 이 둘 외에도 해시 충돌을 해결하기 위한 다양한 자료 구조가 있지만, 거의 모두 이 둘을 응용한 것이라고 볼 수 있다.
-    
-    <p align="center">
-    <img src="https://user-images.githubusercontent.com/48249549/115504986-c43b5300-a2b3-11eb-9a14-aadd7d776c4f.png">
-    <p style="font-weight:bold" align="center">Open Addressing과 Separate Chaning</p>
-    </p>
-    
-    Java HashMap에서 사용하는 방식은 Separate Chaning이다. Open Addressing은 데이터를 삭제할 때 처리가 효율적이기 어려운데, HashMap에서 remove() 메서드는 매우 빈번하게 호출될 수 있기 때문이다. 게다가 HashMap에 저장된 키-값 쌍 개수가 일정 개수 이상으로 많아지면, 일반적으로 Open Addressing은 Separate Chaining보다 느리다. Open Addressing의 경우 해시 버킷을 채운 밀도가 높아질수록 Worst Case 발생 빈도가 더 높아지기 때문이다. 반면 Separate Chaining 방식의 경우 해시 충돌이 잘 발생하지 않도록 '조정'할 수 있다면 Worst Case 또는 Worst Case에 가까운 일이 발생하는 것을 줄일 수 있다
-    
-    Java 7까지는 데이터의 개수가 많아지면 Seperate Chaning에서 링크드 리스트를 사용했지만 Java 8에서부터는 하나의 해시 버킷에 8개의 키-값 쌍이 모이면 링크드 리스트를 트리로 변경하여 트리를 이용해 저장한다.
+Boolean같이 서로 구별되는 객체의 종류가 적거나, Integer, Long, Double 같은 Number 객체는 객체가 나타내려는 값 자체를 해시값으로 사용할 수 있기 때문에 완전한 해시 함수 대상으로 삼을 수 있다. 하지만 String이나 POJO(plain old java object)에 대하여 완전한 해시 함수를 제작하는 것은 사실상 불가능하다.
 
+적은 연산만으로 빠르게 동작할 수 있는 완전한 해시 함수가 있다고 하더라도, 그것을 HashMap에서 사용할 수 있는 것은 아니다. HashMap은 기본적으로 각 객체의 hashCode() 메서드가 반환하는 값을 사용하는 데, 결과 자료형은 int다. 32비트 정수 자료형으로는 완전한 자료 해시 함수를 만들 수 없다. 논리적으로 생성 가능한 객체의 수가 232보다 많을 수 있기 때문이며, 또한 모든 HashMap 객체에서 O(1)을 보장하기 위해 랜덤 접근이 가능하게 하려면 원소가 232인 배열을 모든 HashMap이 가지고 있어야 하기 때문이다.
+
+따라서 HashMap을 비롯한 많은 해시 함수를 이용하는 associative array 구현체에서는 메모리를 절약하기 위하여 실제 해시 함수의 표현 정수 범위 `|N|`보다 작은 M개의 원소가 있는 배열만을 사용한다. 따라서 다음과 같이 객체에 대한 해시 코드의 나머지 값을 해시 버킷 인덱스 값으로 사용한다.
+
+```java
+int index = X.hashCode() % M;
+```
+
+이렇게 사용을 하면 서로 다른 객체가 1/M의 확률로 같은 해시 버킷을 사용하게 된다. 이는 해시 함수가 얼마나 해시 충돌을 회피하도록 잘 구현되었느냐에 상관없이 발생할 수 있는 또 다른 종류의 해시 충돌이다. 이를 해결하는 방식은 대표적으로 두 가지가 있는데, 하나는 Open Addressing과 다른 하나는 Separate Chaning이다. 이 둘 외에도 해시 충돌을 해결하기 위한 다양한 자료 구조가 있지만, 거의 모두 이 둘을 응용한 것이라고 볼 수 있다.
+
+<p align="center">
+<img src="https://user-images.githubusercontent.com/48249549/115504986-c43b5300-a2b3-11eb-9a14-aadd7d776c4f.png">
+<p style="font-weight:bold" align="center">Open Addressing과 Separate Chaning</p>
+</p>
+
+Java HashMap에서 사용하는 방식은 Separate Chaning이다. Open Addressing은 데이터를 삭제할 때 처리가 효율적이기 어려운데, HashMap에서 remove() 메서드는 매우 빈번하게 호출될 수 있기 때문이다. 게다가 HashMap에 저장된 키-값 쌍 개수가 일정 개수 이상으로 많아지면, 일반적으로 Open Addressing은 Separate Chaining보다 느리다. Open Addressing의 경우 해시 버킷을 채운 밀도가 높아질수록 Worst Case 발생 빈도가 더 높아지기 때문이다. 반면 Separate Chaining 방식의 경우 해시 충돌이 잘 발생하지 않도록 '조정'할 수 있다면 Worst Case 또는 Worst Case에 가까운 일이 발생하는 것을 줄일 수 있다
+
+Java 7까지는 데이터의 개수가 많아지면 Seperate Chaning에서 링크드 리스트를 사용했지만 Java 8에서부터는 하나의 해시 버킷에 8개의 키-값 쌍이 모이면 링크드 리스트를 트리로 변경하여 트리를 이용해 저장한다.
   </div>
 </details>
 
