@@ -9,10 +9,10 @@ category: Java
 author: Err0rCode7
 ---
 
-#### equals와 hashCode 함수
+### equals와 hashCode 함수
 equals와 hashCode는 모두 Java 객체의 최상위 객체인 Object 클래스에 정의 되어있는 메소드이다. 그렇기 때문에 Java의 모든 객체는 Object 클래스에 정의된 equals와 hashCode 함수를 상속받고있다.
 
-##### What is equals method?
+#### What is equals method?
 
 equals 메소드는 2개의 객체의 동등을 비교할 때 사용된다. Object 클래스에서 equals가 구현된 방법은 2개의 객체의 참조 값이 동일한지를 확인한다.
 
@@ -30,7 +30,7 @@ String 클래스의 경우 equals 메소드가 오버라이드 되어있다. 동
 
 
 
-##### What is hashCode method?
+#### What is hashCode method?
 
 hashCode는 런타임에 객체의 유일한 integer값을 반환하는 메소드로 일반적으로 Object 클래스에서는 heap에 저장된 객체의 메모리 주소를 integer 값으로 반환하는 방식으로 구현되어있다.
 
@@ -56,9 +56,11 @@ hashCode 메소드의 일반 규약은 다음과 같다.
 - HashTable에 get 메서드로 객체를 조회하는 경우, 값이 같은 객체가 있다면(equals()가 true) 그 객체를 리턴한다. 값이 같은 객체가 없다면 null을 리턴한다.
 
 <details>
-  <summary> 👉 접기 / 펼치기 👈</summary>
+  <summary>
+  <p style="font-weight:bold"> 👉 접기 / 펼치기 👈</p>
+  </summary>
   <div markdown="1">
-##### 해시 분포와 해시 충돌
+#### 해시 분포와 해시 충돌
 
 
 동일하지 않은 어떤 객체 X와 Y가 있을 때, 즉 `X.equals(Y)`가 거짓일 때 `X.hashCode() != Y.hashCode()` 가 같지 않다면, 이때 사용하는 해시 함수는 완전한 해시 함수라고 한다.
@@ -86,7 +88,7 @@ Java 7까지는 데이터의 개수가 많아지면 Seperate Chaning에서 링�
   </div>
 </details>
 
-##### equals() 와 hashCode()를 같이 재정의해야 하는 이유
+#### equals() 와 hashCode()를 같이 재정의해야 하는 이유
 
 equals()와 hashCode() 중 하나만 재정의하면 어떤 문제가 일어나는 지 살펴보자.
 
@@ -94,11 +96,11 @@ hashCode()를 재정의하지 않으면 같은 값 객체라도 해시 값이 �
 
 반대로 equals()를 재정의하지 않으면 hashCode()가 만든 해시값을 이용해 객체가 저장된 버킷을 찾을 수는 있지만 해당 객체가 자신과 같은 객체인지 값을 비교할 수 없기 때문에 null을 리턴하게 된다. 따라서 이또한 원하는 객체를 찾을 수 없다.
 
-##### 결론
+#### 결론
 
 객체의 정확한 동등 비교를 위해서는 특히 Hash 관련 컬렉션 프레임워크를 사용할 때에서는, equals() 와 hashCode() 메소드를 모두 재정의해서 두 가지 모두가 논리적 동등을 비교 가능하도록 해야한다.
 
-##### Reference
+#### Reference
 
 [https://d2.naver.com/helloworld/831311](https://d2.naver.com/helloworld/831311)
 
