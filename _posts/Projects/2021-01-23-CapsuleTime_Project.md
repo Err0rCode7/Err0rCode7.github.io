@@ -42,7 +42,7 @@ author: Err0rCode7
 회의 시간이 되고 우리 팀은 먼저 개발 기술 설계 이전에 필요한 앱 화면이 어느 것이 있고 앱 화면이 흘러가는지 전체적인 사용 흐름을 작성했다. 어떤 페이지가 필요할 지 생각해본 내용은 다음과 같았다. 로그인과 회원가입 화면, 자신의 타임 캡슐과 타임 캡슐의 날짜 등을 확인할 수 있는 화면, 지도로 확인할 수 있는 화면, AR로 직접 캡슐을 볼 수 있는 화면, 개인 프로필과 설정 화면이 필요했다. 그리고 이것을 토대로 아이패드를 이용해서 흐름을 작성했다.
 
 <p align="center">
-	<img src="https://user-images.githubusercontent.com/48249549/105627334-b1161400-5e79-11eb-9f7e-1b28b2ebf07b.png" />
+	<img src="https://user-images.githubusercontent.com/48249549/116285569-34246e80-a7c9-11eb-839b-486248d428ae.png" />
 	<p style="font-weight:bold" align="center">설계 스케치</p>
 </p>
 
@@ -66,8 +66,8 @@ author: Err0rCode7
 이렇게 개발을 하다보니 express를 이용해서 어떻게 URL을 나누고 route 하는 지, mysql과 연결하여 하는 지를 알게 되었고 가장 필요하다고 생각한 DB 내용을 모델링을 해보았다.
 
 <p align="center">
-	<img src="https://user-images.githubusercontent.com/48249549/105628322-8f1f9000-5e7f-11eb-820e-311e16e542ea.png" />
-	<p style="font-weight:bold" align="center">DB 모델링</p>
+	<img src="https://user-images.githubusercontent.com/48249549/116279347-6383ad00-a7c2-11eb-826e-9b6af83cc478.png" />
+	<p style="font-weight:bold" align="center">최종 DB 모델링(ERD)</p>
 </p>
 
 여기까지 진행을 하고 다시 회의 시간이 되었다. 이번 회의때 모두가 어느 부분까지 공부와 개발을 하고 나온 결과가 어떤 것인지 공유를 했고 진행하면서 어려운 점에 대해서 얘기를 나누었다. 나는 서버 부분에서 rest api를 이용하여 어떻게 정보를 주고받는지에 대한 전체적인 틀을 설명했고 어떻게 통신해야 할지에 대한 내용을 말하여 방법을 결정했다. 그리고 다음 회의 전까지 어느 내용까지 해야할지를 정했는데 이 때부터 안드로이드 App에 같이 참여하게 되었다. 안드로이드 App 개발을 맡은 팀원이 어려움을 느끼기도 했고 rest api를 개발하고 테스트 할 때 안드로이드 App 개발을 같이 진행하면 좋기 때문에 그렇게 진행하게 되었다.
@@ -152,16 +152,15 @@ get 같은 경우 캡슐 로그를 보는 곳에도 필요하지만 다른 팀�
 ---
 
 <p>
-[사진 업로드 예정]
-<img src="" />
-<p style="font-weight:bold" align="center">최종 결과 화면</p>
+<img src="https://user-images.githubusercontent.com/48249549/116283603-04746700-a7c7-11eb-8187-661c543df568.png" />
+<img src="https://user-images.githubusercontent.com/48249549/116285181-d8f27c00-a7c8-11eb-822b-35fc8eb9daee.png" />
+<p style="font-weight:bold" align="center">최종 App 화면</p>
 </p>
 
 개발이 끝난 후 우리 팀은 완성된 내용을 잘 정리한 ppt와 아이템을 소개하는 UCC, 포스터를 만들었고 최종 발표를 잘 마쳤다. 또한 교수님의 추천으로 캡스톤 디자인 경진대회와 IT 서비스 학회에서 추진하는 졸업작품 논문에 capsule time을 선보였다. 캡스톤 디자인 전시회를 끝으로 프로젝트는 성공적으로 끝이났고 캡스톤 디자인 전시회 장려상, IT 서비스 학회 졸업작품 논문 우수상의 결과를 내었다.
 
 <p>
-[사진 업로드 예정]
-<img src="" />
+<img src="https://user-images.githubusercontent.com/48249549/116281045-4354ed80-a7c4-11eb-8ead-a39324e73a4e.png" />
 <p style="font-weight:bold" align="center">수상 내역</p>
 </p>
 
