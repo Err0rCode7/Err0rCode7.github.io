@@ -353,6 +353,8 @@ CGLib의 의존성을 추가하여 개발해야 된다는 점은 Spring 3.2 버�
 
 ## Reference
 
+[자바 객체지향의 원리](https://wikibook.co.kr/java-oop-for-spring/)
+
 https://docs.spring.io/spring-framework/docs/current/reference/html/core.html#aop-introduction-proxies
 
 https://www.baeldung.com/cglib
