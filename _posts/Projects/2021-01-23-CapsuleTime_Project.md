@@ -42,14 +42,14 @@ author: Err0rCode7
 회의 시간이 되고 우리 팀은 먼저 개발 기술 설계 이전에 필요한 앱 화면이 어느 것이 있고 앱 화면이 흘러가는지 전체적인 사용 흐름을 작성했다. 어떤 페이지가 필요할 지 생각해본 내용은 다음과 같았다. 로그인과 회원가입 화면, 자신의 타임 캡슐과 타임 캡슐의 날짜 등을 확인할 수 있는 화면, 지도로 확인할 수 있는 화면, AR로 직접 캡슐을 볼 수 있는 화면, 개인 프로필과 설정 화면이 필요했다. 그리고 이것을 토대로 아이패드를 이용해서 흐름을 작성했다.
 
 <p align="center">
-	<img src="https://user-images.githubusercontent.com/48249549/116285569-34246e80-a7c9-11eb-839b-486248d428ae.png" />
+	<img src="https://user-images.githubusercontent.com/48249549/105627334-b1161400-5e79-11eb-9f7e-1b28b2ebf07b.png" />
 	<p style="font-weight:bold" align="center">설계 스케치</p>
 </p>
 
 전체적인 화면을 작성하니 어떤 화면에 어느 것이 들어가야할 지 보이기 시작했다. 그래서 다음으로 구체적으로 화면에는 어떤 것들이 있어야 하는지 와이어 프레임 형태로 스케치를 진행했다. 와이어 프레임을 하다보니 생각보다 해야할 것이 많았다. 그리고 추가하고싶은 다른 기능들이 떠올랐는데 하다보니 너무 방대해졌다. 그러다가 결국 덕지덕지 붙인 첨가물들을 다 제거하고 우리 아이디어의 장점을 최대한 살리는 방향으로 계속 이어나갔다.
 
 <p align="center">
-	<img src="https://user-images.githubusercontent.com/48249549/105627611-35b56200-5e7b-11eb-8979-3d5614ff1717.png" />
+	<img src="https://user-images.githubusercontent.com/48249549/116285569-34246e80-a7c9-11eb-839b-486248d428ae.png" />
 	<p style="font-weight:bold" align="center">기술 설계도</p>
 </p>
 
