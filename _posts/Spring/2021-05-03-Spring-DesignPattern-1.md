@@ -1,9 +1,9 @@
 ---
 bg: "Review.jpg"
 layout: post
-title:  "Spring과 디자인 패턴 - 1"
-crawlertitle: "Spring과 디자인 패턴"
-summary: "Spring과 디자인 패턴 - 1"
+title:  "Spring과 Design Pattern - 1"
+crawlertitle: "Spring과 Design Pattern"
+summary: "Spring과 Design Pattern - 1"
 date: 2021-05-03 15:22:00 +0900
 category: Spring
 author: Err0rCode7
