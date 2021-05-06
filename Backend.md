@@ -1,5 +1,5 @@
 ---
-bg: "BACKEND.jpg"
+bg: "BACKEND.png"
 layout: page
 permalink: /Backend/
 category: Backend
