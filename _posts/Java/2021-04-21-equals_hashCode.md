@@ -23,12 +23,9 @@ public boolean equals(Object obj) {
   return (this == obj)
 }
 ```
-
 String 클래스의 경우 equals 메소드가 오버라이드 되어있다. 동일한 문자열을 갖는 String 인스턴스를 두 개를 생성하고 equals 메소드를 이용해보면 `true`	가 나오게 되는데, 참조하는 객체를 비교하는 것이 아닌 객체가 갖는 문자열을 비교하는 코드로 equals이 오버라이드됐음을 알 수 있다. 즉, String 클래스에서는 동등을 문자열(객체 내부 value)로 정의한다.
 
 두 객체를 `a==b`와 같이 비교한다면 동일성 비교가 되고 `a.equals(b)`와 같이 비교한다면 동등성 비교가 된다.
-
-
 
 ## What is hashCode method?
 
