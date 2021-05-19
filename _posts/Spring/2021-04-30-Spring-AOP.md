@@ -80,7 +80,7 @@ AOP에서 사용되는 5가지의 용어가 있다.
   }
   ```
 
-  ⛓ 사이가 바로 Pointcut이다. 우선 `@Before("execution(* runSomething())")` 의 의미부터 살펴보자면 지금 선언하고 있는 메서드 (public void before)를 ⛓로 감싸져 있는 부분의 메서드가 실행되기 전(`@Before`)에 실행하라는 의미이다.
+  ⛓ 사이가 바로 Pointcut이다. 우선 `@Before("execution(* runSomething())")` 의 의미부터 살펴보자면 지금 선언하고 있는 메서드 (public void before)를 ⛓로 감싸져 있는 부분의 메서드가 실행되기 전(`@Before`)에 실행하라는 의미이다. (⛓는 구분하기 위해 적어놓은것 뿐이다.)
 
   결국 Pointcut이라고 하는 것은 횡단 관심사를 적용할 타깃 메서드를 선택하는 지시자(메서드 선택 필터)인 것이다. 이를 줄여서 표현하면 Pointcut이란 `"타깃 클래스의 타깃 메서드 지정자"` 라고 할 수 있다. 그럼 위에서는 Aspect 적용 위치 지정자라고 표현했을까?
 
