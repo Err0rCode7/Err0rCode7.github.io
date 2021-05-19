@@ -65,7 +65,7 @@ try {
 
 AOP에서 사용되는 5가지의 용어가 있다.
 
--  Pointcut
+- Pointcut
 
   Aspect 적용 위치 지정자라고 표현할 수 있다.
 
