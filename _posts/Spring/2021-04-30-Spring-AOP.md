@@ -237,7 +237,7 @@ Object proxy = Proxy.newProxyInstance(ClassLoader       // 클래스로더
 1. 타깃의 인터페이스를 자체적인 검증 로직을 통해 ProxyFactory에 의해 타깃의 인터페이스를 상속한 Proxy 객체 생성
 2. Proxy 객체에 InvocationHandler를 포함시켜 하나의 객체로 반환
 
-여기서 핵심은 무엇보다 인터페이스를 기준으로 Proxy 객체를 생성해준다는 점이다. 따라서 구현체는 인터페이스를 상속받아야하고, @Autowired를 통해 생성된 Proxy Bean을 사용하기 위해선 반드시 인ㄴ터페이스의 타입으로 지정해줘야 한다.
+여기서 핵심은 무엇보다 인터페이스를 기준으로 Proxy 객체를 생성해준다는 점이다. 따라서 구현체는 인터페이스를 상속받아야하고, @Autowired를 통해 생성된 Proxy Bean을 사용하기 위해선 반드시 인터페이스의 타입으로 지정해줘야 한다.
 
 ```java
 @Controller
