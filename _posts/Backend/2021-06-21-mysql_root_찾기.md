@@ -50,6 +50,6 @@ exit;
 4. 모든 권한 부여
 
    ```sql
-   grant all privileges on *.* to test@localhost identified by '비밀번호' with grant option;
+   grant all privileges on *.* to 'test'@'%';
    ```
 
