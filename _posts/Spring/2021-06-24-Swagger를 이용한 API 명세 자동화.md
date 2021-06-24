@@ -1,11 +1,11 @@
 ---
-bg: "BACKEND.png"
+bg: "Review.jpg"
 layout: post
 title:  "Swagger를 이용한 API 명세 자동화"
 crawlertitle: "Swagger를 이용한 API 명세 자동화"
 summary: "Swagger를 이용한 API 명세 자동화"
 date: 2021-06-24 21:42:00 +0900
-category: Backend
+category: Spring
 author: Err0rCode7
 ---
 
