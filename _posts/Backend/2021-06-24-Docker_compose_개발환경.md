@@ -32,7 +32,7 @@ Docker를 이용할 때처럼 `Dockerfile`을 정의하고 각각의 의존성�
 
 [Example 코드](https://github.com/err0rCode7/docker-compose-example)에서 예제 전체내용을 확인해볼 수 있다. 
 
-**이번 포스팅 이후에 여러개의 서비스(Web app)을 추가할 예정이니 커밋 내용(`last commit: 1687f706f50464f169133d53394f136610ef0754`)을 잘 확인하길 바란다.**
+**이번 포스팅 이후에 여러개의 서비스(Web app)을 추가할 예정이니 커밋 내용(`last commit: d4ad29d28aff6bce5c752fc437ef032e63984740`)을 잘 확인하길 바란다.**
 
 <p align="center">
 <img src="https://user-images.githubusercontent.com/48249549/123220823-47259780-d509-11eb-84e2-777367c9ff37.png">
