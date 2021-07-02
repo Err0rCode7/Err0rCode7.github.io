@@ -505,7 +505,7 @@ networks:
 
 - `volumes:` DB 컨테이너를 구성할 때 중요한 부분이다. 위에서 말했듯, 파일 시스템의 볼륨을 컨테이너안에서 사용할 수 있도록 해주는 것이다. DB의 내용은 사라지면 안되므로 파일시스템에 저장해야한다.
 
-- `cap_add: capability를 등록하는 것이다 `SYS_NICE` 컨테이너가 프로세스의 nice 값을 올릴 수 있도록 허용하는 것인데, 프로세스의 스케줄링 우선순위를 변경하는 것을 가능하도록한다.
+- `cap_add:` capability를 등록하는 것이다 `SYS_NICE` 컨테이너가 프로세스의 nice 값을 올릴 수 있도록 허용하는 것인데, 프로세스의 스케줄링 우선순위를 변경하는 것을 가능하도록한다.
 
 ### spring_app service
 
@@ -530,7 +530,7 @@ networks:
 
 위에서 거의 다 설명이 되었기 때문에 하나만 expose만 설명하겠다.
 
-- `expose:` `ports:` 같은 경우 컨테이너 외부와 내부를 이어주는 포트포워딩이라고 할 수 있는데, expose 같은 경우 컨테이너 간의 포트를 열어주는 것을 얘기한다. 따라서 nginx가 8080 포트로 spring_app에 접근할 수 있게 되는 것이다. 하지만 컨테이너 외부에서 브라우저로 `localhost:8080` 접근하는 것은 불가능하다. 따라서 nginx의 리버스 프록시로만 spring_app에 접근할 수 있게 된다.
+- `expose:` **ports:** 같은 경우 컨테이너 외부와 내부를 이어주는 포트포워딩이라고 할 수 있는데, expose 같은 경우 컨테이너 간의 포트를 열어주는 것을 얘기한다. 따라서 nginx가 8080 포트로 spring_app에 접근할 수 있게 되는 것이다. 하지만 컨테이너 외부에서 브라우저로 `localhost:8080` 접근하는 것은 불가능하다. 따라서 nginx의 리버스 프록시로만 spring_app에 접근할 수 있게 된다.
 
 ## 의존성의 또 다른 문제
 
@@ -548,7 +548,7 @@ networks:
 
 ## References
 
-[https://github.com/docker/awesome-compose] (https://github.com/docker/awesome-compose)
+[https://github.com/docker/awesome-compose](https://github.com/docker/awesome-compose)
 
 [wait-for-it](https://github.com/vishnubob/wait-for-it)
 
