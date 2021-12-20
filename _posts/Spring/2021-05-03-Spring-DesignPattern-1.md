@@ -207,7 +207,7 @@ public class Decorator implements IService {
 }
 
 public class ClientWithDecorator {
-  public static v한id main(String[] args) {
+  public static void main(String[] args) {
     // 프록시를 이용한 호출
     IService decorator = new Decorator();
     System.out.println(decorator.runSomething());
